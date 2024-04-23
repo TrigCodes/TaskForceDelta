@@ -7,9 +7,6 @@ public class Bullet : MonoBehaviour
     public int Damage {get;set;}
     private Vector3 target; // Position of the target enemy
 
-    void Start() {
-        Damage = 300;
-    }
     void Update()
     {
         // Move the bullet towards the target
@@ -20,6 +17,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Bullet enter enemy");
             Destroy(gameObject);
         }
     }

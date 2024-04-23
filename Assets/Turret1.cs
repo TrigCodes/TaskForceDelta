@@ -5,8 +5,8 @@ using UnityEngine;
 public class Turret1 : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] float shootingDistance = 50f;
-    [SerializeField] float speedbullet = 5f;
+    [SerializeField] private float shootingDistance = 50f;
+    private TurretStat stat;
     [SerializeField] float fireRate = 3f;
     public GameObject bullet;
     GameObject target;
@@ -15,6 +15,8 @@ public class Turret1 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        // cost, hitpoint, shield, damage, fireRate
+        stat = new TurretStat(30, 100, 30,400,3f);
     }
 
     void Update()
@@ -23,7 +25,7 @@ public class Turret1 : MonoBehaviour
         {
             canShoot = false;
             //Coroutine for delay between shooting
-            StartCoroutine("AllowToShoot");
+            StartCoroutine(nameof(AllowToShoot));
             //array with enemies
             //you can put in start, iff all enemies are in the level at beginn (will be not spawn later)
             GameObject[] allTargets = GameObject.FindGameObjectsWithTag("Enemy");
@@ -49,15 +51,14 @@ public class Turret1 : MonoBehaviour
 
     void Fire()
     {
-        //link to spawned bullet, you dont need it, if the bullet has own moving script
         GameObject tpmBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        // tpmBullet.transform.right = direction;
+        tpmBullet.GetComponent<Bullet>().Damage = stat.Damage;
         tpmBullet.GetComponent<Bullet>().SetTarget(target.transform.position);
     }
 
     IEnumerator AllowToShoot()
     {
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(stat.FireRate);
         canShoot = true;
     }
 
