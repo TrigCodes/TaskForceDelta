@@ -7,7 +7,7 @@ public class Turret1 : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float shootingDistance = 50f;
-    private TurretStat stat;
+    public TurretStat stat;
     [SerializeField] private GameObject bullet;
     private GameObject target;
     bool canShoot = true;
@@ -16,7 +16,7 @@ public class Turret1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // cost, hitpoint, shield, damage, fireRate
-        stat = new TurretStat(30, 100, 30, 400, 3f);
+        stat = new TurretStat(30, 100, 30, 100, 2f);
         dmgCooldown = 0.0f;
     }
 
@@ -97,4 +97,5 @@ public class Turret1 : MonoBehaviour
     //     Debug.Log("Waited");
     //     yield return new WaitForSeconds(2);
     // }
+
 }
