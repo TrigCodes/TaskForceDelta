@@ -1,4 +1,6 @@
-public class TurretStat
+using UnityEngine;
+
+public class TurretStat : MonoBehaviour
 {
     public int Cost { get; set; }
     public int Hitpoint { get; set; }

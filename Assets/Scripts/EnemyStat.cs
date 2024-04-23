@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStat
+public class EnemyStat : MonoBehaviour
 {
     public float Speed { get; set; }
     public int Damage { get; set; }

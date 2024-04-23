@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Turret1 : MonoBehaviour
@@ -7,16 +8,16 @@ public class Turret1 : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float shootingDistance = 50f;
     private TurretStat stat;
-    [SerializeField] float fireRate = 3f;
-    public GameObject bullet;
-    GameObject target;
+    [SerializeField] private GameObject bullet;
+    private GameObject target;
     bool canShoot = true;
-
+    private float dmgCooldown;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         // cost, hitpoint, shield, damage, fireRate
-        stat = new TurretStat(30, 100, 30,400,3f);
+        stat = new TurretStat(30, 100, 30, 400, 3f);
+        dmgCooldown = 0.0f;
     }
 
     void Update()
@@ -25,7 +26,7 @@ public class Turret1 : MonoBehaviour
         {
             canShoot = false;
             //Coroutine for delay between shooting
-            StartCoroutine(nameof(AllowToShoot));
+            StartCoroutine(AllowToShoot());
             //array with enemies
             //you can put in start, iff all enemies are in the level at beginn (will be not spawn later)
             GameObject[] allTargets = GameObject.FindGameObjectsWithTag("Enemy");
@@ -47,8 +48,16 @@ public class Turret1 : MonoBehaviour
                 }
             }
         }
-    }
 
+    }
+    // void FixedUpdate()
+    // {
+    //     // Check for death
+    //     if (stat.Hitpoint <= 0)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
     void Fire()
     {
         GameObject tpmBullet = Instantiate(bullet, transform.position, Quaternion.identity);
@@ -61,5 +70,31 @@ public class Turret1 : MonoBehaviour
         yield return new WaitForSeconds(stat.FireRate);
         canShoot = true;
     }
+    // void OnCollisionEnter2D(Collision2D other)
+    // {
 
+    // }
+    // void OnCollisionStay2D(Collision2D other)
+    // {
+    //     // dmgCooldown += Time.deltaTime;
+    //     // if (dmgCooldown > 1) {
+    //     stat.Hitpoint -= other.gameObject.GetComponent<Enemies1>().stat.Damage;
+    //     Debug.Log(stat.Hitpoint);
+    //     StartCoroutine(TakeDamageCooldown());
+    //     // dmgCooldown = 0.0f;
+    //     // }
+
+    //     // while (dmgCooldown <= 2) {
+    //     //     dmgCooldown += Time.deltaTime;
+    //     // }
+    //     // if (other.CompareTag("Enemy")) {
+    //     //     float dps = other.gameObject.GetComponent<Turret1>().stat.Damage*Time.deltaTime;
+    //     //     stat.Hitpoint -= (int)dps;
+    //     // }
+    // }
+    // IEnumerator TakeDamageCooldown()
+    // {
+    //     Debug.Log("Waited");
+    //     yield return new WaitForSeconds(2);
+    // }
 }

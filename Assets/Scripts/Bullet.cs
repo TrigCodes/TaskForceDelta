@@ -3,7 +3,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    // [SerializeField] private int damage = 5;
     public int Damage {get;set;}
     private Vector3 target; // Position of the target enemy
 
