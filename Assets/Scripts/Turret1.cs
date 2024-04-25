@@ -5,64 +5,65 @@ using UnityEngine;
 
 public class Turret1 : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float shootingDistance = 50f;
-    public TurretStat stat;
+    [SerializeField] private float range = 10f;
     [SerializeField] private GameObject bullet;
-    private GameObject target;
+    private Transform target;
+    public TurretStat stat;
+    private float fireCountdown = 0.0f;
     bool canShoot = true;
     private float dmgCooldown;
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         // cost, hitpoint, shield, damage, fireRate
         stat = new TurretStat(30, 100, 30, 100, 2f);
         dmgCooldown = 0.0f;
-    }
 
-    void Update()
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+    }
+    void UpdateTarget()
     {
-        if (canShoot)
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float shortestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+        foreach (GameObject enemy in enemies)
         {
-            canShoot = false;
-            //Coroutine for delay between shooting
-            StartCoroutine(AllowToShoot());
-            //array with enemies
-            //you can put in start, iff all enemies are in the level at beginn (will be not spawn later)
-            GameObject[] allTargets = GameObject.FindGameObjectsWithTag("Enemy");
-            if (allTargets != null)
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
             {
-                target = allTargets[0];
-                //look for the closest
-                foreach (GameObject tmpTarget in allTargets)
-                {
-                    if (Vector2.Distance(transform.position, tmpTarget.transform.position) < Vector2.Distance(transform.position, target.transform.position))
-                    {
-                        target = tmpTarget;
-                    }
-                }
-                //shoot if the closest is in the fire range
-                if (Vector2.Distance(transform.position, target.transform.position) < shootingDistance)
-                {
-                    Fire();
-                }
+                shortestDistance = distanceToEnemy;
+                closestEnemy = enemy;
             }
         }
-
+        if (closestEnemy != null && shortestDistance <= range) {
+            target = closestEnemy.transform;
+        } else {
+            target = null;
+        }
     }
-    // void FixedUpdate()
-    // {
-    //     // Check for death
-    //     if (stat.Hitpoint <= 0)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
+    void Update()
+    {
+        if (target == null) {
+            return;
+        }
+        if (fireCountdown <= 0) {
+            Fire();
+            fireCountdown = 1f/stat.FireRate;
+        }
+        fireCountdown -= Time.deltaTime;
+    }
+    // TODO: bullet spawn location needed to change.
     void Fire()
     {
-        GameObject tpmBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        tpmBullet.GetComponent<Bullet>().Damage = stat.Damage;
-        tpmBullet.GetComponent<Bullet>().SetTarget(target.transform.position);
+        GameObject bulletSpawn = Instantiate(bullet, transform.position, Quaternion.identity);
+        Bullet bulletProp = bulletSpawn.GetComponent<Bullet>();
+
+        if (bullet != null) {
+            bulletProp.Damage = stat.Damage;
+            bulletProp.SetTarget(target);
+        }
+
+        // tpmBullet.GetComponent<Bullet>().Damage = stat.Damage;
+        // tpmBullet.GetComponent<Bullet>().SetTarget(target);
     }
 
     IEnumerator AllowToShoot()
@@ -70,32 +71,9 @@ public class Turret1 : MonoBehaviour
         yield return new WaitForSeconds(stat.FireRate);
         canShoot = true;
     }
-    // void OnCollisionEnter2D(Collision2D other)
-    // {
-
-    // }
-    // void OnCollisionStay2D(Collision2D other)
-    // {
-    //     // dmgCooldown += Time.deltaTime;
-    //     // if (dmgCooldown > 1) {
-    //     stat.Hitpoint -= other.gameObject.GetComponent<Enemies1>().stat.Damage;
-    //     Debug.Log(stat.Hitpoint);
-    //     StartCoroutine(TakeDamageCooldown());
-    //     // dmgCooldown = 0.0f;
-    //     // }
-
-    //     // while (dmgCooldown <= 2) {
-    //     //     dmgCooldown += Time.deltaTime;
-    //     // }
-    //     // if (other.CompareTag("Enemy")) {
-    //     //     float dps = other.gameObject.GetComponent<Turret1>().stat.Damage*Time.deltaTime;
-    //     //     stat.Hitpoint -= (int)dps;
-    //     // }
-    // }
-    // IEnumerator TakeDamageCooldown()
-    // {
-    //     Debug.Log("Waited");
-    //     yield return new WaitForSeconds(2);
-    // }
-
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
 }

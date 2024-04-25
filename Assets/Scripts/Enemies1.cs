@@ -15,7 +15,7 @@ public class Enemies1 : MonoBehaviour
         if (b != null) {
             playerBase = b.GetComponent<Transform>();
         } else {
-            Debug.LogError("Cannot find Base");
+            Debug.Log("Cannot find Base");
         }
         rb = gameObject.GetComponent<Rigidbody>();
         stat = new EnemyStat(1.0f, 30, 500);

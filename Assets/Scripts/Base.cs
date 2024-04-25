@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] private int health;
+    [SerializeField] private int health = 500;
     [SerializeField] private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        health = 500;
+        // rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,8 +22,12 @@ public class Base : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         Vector3 newPos = new Vector3(collision.transform.position.x-0.5f, collision.transform.position.y-0.5f, collision.transform.position.z);
         collision.transform.position = newPos;
+
     }
     public void DamageHealth(int damage) {
         health -= damage;
+    }
+    void OnDestroy() {
+        Debug.Log("object destroyed");
     }
 }
