@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Turret1 : MonoBehaviour
+public class Turret : MonoBehaviour
 {
-    [SerializeField] private float range = 10f;
     [SerializeField] private GameObject bullet;
     private Transform target;
-    public TurretStat stat;
     private float fireCountdown = 0.0f;
-    bool canShoot = true;
-    private float dmgCooldown;
+
+    [Header("Turret Stat")]
+    [SerializeField] private int hitPoint = 30;
+    [SerializeField] private int shield = 30;
+    [SerializeField] private float range = 10f;
+    [SerializeField] private int damage = 100;
+    [SerializeField] private float fireRate = 1.0f;
+
     void Start()
     {
-        // cost, hitpoint, shield, damage, fireRate
-        stat = new TurretStat(30, 100, 30, 100, 2f);
-        dmgCooldown = 0.0f;
-
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
     void UpdateTarget()
     {
@@ -47,7 +47,7 @@ public class Turret1 : MonoBehaviour
         }
         if (fireCountdown <= 0) {
             Fire();
-            fireCountdown = 1f/stat.FireRate;
+            fireCountdown = 1f/fireRate;
         }
         fireCountdown -= Time.deltaTime;
     }
@@ -58,19 +58,11 @@ public class Turret1 : MonoBehaviour
         Bullet bulletProp = bulletSpawn.GetComponent<Bullet>();
 
         if (bullet != null) {
-            bulletProp.Damage = stat.Damage;
+            bulletProp.Damage = damage;
             bulletProp.SetTarget(target);
         }
-
-        // tpmBullet.GetComponent<Bullet>().Damage = stat.Damage;
-        // tpmBullet.GetComponent<Bullet>().SetTarget(target);
     }
 
-    IEnumerator AllowToShoot()
-    {
-        yield return new WaitForSeconds(stat.FireRate);
-        canShoot = true;
-    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

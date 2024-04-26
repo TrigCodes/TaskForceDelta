@@ -4,11 +4,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    private Transform target; // Position of the target enemy
+    [Header("Bullet Stat")]
     [SerializeField] private float speed = 10f;
     public int Damage { get; set; }
-    // public float ExplosionRad { get; set; }
     [SerializeField] private float explosionRad = 0;
-    private Transform target; // Position of the target enemy
 
     void Start()
     {
@@ -51,7 +51,8 @@ public class Bullet : MonoBehaviour
         }
     }
     void DamageEnemy(Transform enemy) {
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.GetDamaged(Damage);;
     }
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;

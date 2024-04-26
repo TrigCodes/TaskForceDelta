@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d489adad8bc35b64fa1cad159112cb4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBase: {fileID: 0}
+  playerBase: {fileID: 2130516418201149253, guid: f9662be710103124c8570e3840d62a0b, type: 3}
   rb: {fileID: 0}
   knockback: 0
   moveSpeed: 1
