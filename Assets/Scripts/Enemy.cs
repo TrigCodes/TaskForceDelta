@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 1.0f;
     [SerializeField] private int damage = 30;
     [SerializeField] private int hitpoint = 500;
-
+    [SerializeField] private int valueGain = 10;
+    [SerializeField] private bool beSeen = true;
     void Start()
     {
         GameObject b = GameObject.FindWithTag("Base");
@@ -46,7 +47,9 @@ public class Enemy : MonoBehaviour
         hitpoint -= damage;
         if (hitpoint <= 0)
         {
+            Base.Money += valueGain;
             Destroy(gameObject);
         }
     }
+    public bool BeSeen {get {return beSeen;}}
 }

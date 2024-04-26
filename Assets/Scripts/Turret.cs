@@ -15,6 +15,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float range = 10f;
     [SerializeField] private int damage = 100;
     [SerializeField] private float fireRate = 1.0f;
+    [SerializeField] private bool canSee = false;
 
     void Start()
     {
@@ -28,26 +29,34 @@ public class Turret : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            // Can choose target if turret can see, or target can be seen
+            bool canChoose = canSee ? canSee : enemy.GetComponent<Enemy>().BeSeen;
+
+            if (distanceToEnemy < shortestDistance && canChoose)
             {
                 shortestDistance = distanceToEnemy;
                 closestEnemy = enemy;
             }
         }
-        if (closestEnemy != null && shortestDistance <= range) {
+        if (closestEnemy != null && shortestDistance <= range)
+        {
             target = closestEnemy.transform;
-        } else {
+        }
+        else
+        {
             target = null;
         }
     }
     void Update()
     {
-        if (target == null) {
+        if (target == null)
+        {
             return;
         }
-        if (fireCountdown <= 0) {
+        if (fireCountdown <= 0)
+        {
             Fire();
-            fireCountdown = 1f/fireRate;
+            fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
     }
@@ -57,12 +66,22 @@ public class Turret : MonoBehaviour
         GameObject bulletSpawn = Instantiate(bullet, transform.position, Quaternion.identity);
         Bullet bulletProp = bulletSpawn.GetComponent<Bullet>();
 
-        if (bullet != null) {
+        if (bullet != null)
+        {
             bulletProp.Damage = damage;
+            bulletProp.CanSee = canSee;
+            bulletProp.TargetType = "Enemy";
             bulletProp.SetTarget(target);
         }
     }
-
+    public void GetDamaged(int damage)
+    {
+        hitPoint -= damage;
+        if (hitPoint <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

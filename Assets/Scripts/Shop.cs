@@ -6,10 +6,10 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     BuildManager buildManager;
-    // [SerializeField] private TurretBluePrint turret1;
+
     public TurretBluePrint turret1;
     public TurretBluePrint turret2;
-    // [SerializeField] private TurretBluePrint turret2;
+    public TurretBluePrint turret3;
 
     void Start() {
         buildManager = BuildManager.instance;
@@ -20,5 +20,8 @@ public class Shop : MonoBehaviour
     }
     public void SelectTurret2() {
         buildManager.SetTurretToBuild(turret2);
+    }
+    public void SelectTurret3() {
+        buildManager.SetTurretToBuild(turret3);
     }
 }
