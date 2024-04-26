@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
+    public static int Money;
+    [SerializeField] private int startMoney = 500;
+
     [SerializeField] private int health = 500;
     [SerializeField] private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        // rb = GetComponent<Rigidbody>();
+        Money = startMoney;
     }
 
     // Update is called once per frame

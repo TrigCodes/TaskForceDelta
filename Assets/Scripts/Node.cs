@@ -9,7 +9,7 @@ public class Node : MonoBehaviour
     private Color defaultColor;
     private SpriteRenderer spriteRenderer;
 
-    private GameObject turret;
+    public GameObject turret;
     BuildManager buildManager;
 
     void Start()
@@ -25,7 +25,7 @@ public class Node : MonoBehaviour
         {
             return;
         }
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
         {
             return;
         }
@@ -35,9 +35,7 @@ public class Node : MonoBehaviour
             return;
         }
 
-        GameObject turretToBuild = buildManager.GetTurretToBuild();
-
-        turret = Instantiate(turretToBuild, transform.position, transform.rotation);
+    buildManager.BuildOn(this);
     }
 
     void OnMouseEnter()
@@ -46,7 +44,7 @@ public class Node : MonoBehaviour
         {
             return;
         }
-        if (buildManager.GetTurretToBuild() == null)
+        if (!buildManager.CanBuild)
         {
             return;
         }
