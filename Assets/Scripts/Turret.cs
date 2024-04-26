@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Turret1 : MonoBehaviour
+public class Turret : MonoBehaviour
 {
-    [SerializeField] private float range = 10f;
     [SerializeField] private GameObject bullet;
     private Transform target;
-    public TurretStat stat;
     private float fireCountdown = 0.0f;
-    bool canShoot = true;
-    private float dmgCooldown;
+
+    [Header("Turret Stat")]
+    [SerializeField] private int hitPoint = 30;
+    [SerializeField] private int shield = 30;
+    [SerializeField] private float range = 10f;
+    [SerializeField] private int damage = 100;
+    [SerializeField] private float fireRate = 1.0f;
+    [SerializeField] private bool canSee = false;
+
     void Start()
     {
-        // cost, hitpoint, shield, damage, fireRate
-        stat = new TurretStat(30, 100, 30, 100, 2f);
-        dmgCooldown = 0.0f;
-
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
     void UpdateTarget()
     {
@@ -28,26 +29,34 @@ public class Turret1 : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            // Can choose target if turret can see, or target can be seen
+            bool canChoose = canSee ? canSee : enemy.GetComponent<Enemy>().BeSeen;
+
+            if (distanceToEnemy < shortestDistance && canChoose)
             {
                 shortestDistance = distanceToEnemy;
                 closestEnemy = enemy;
             }
         }
-        if (closestEnemy != null && shortestDistance <= range) {
+        if (closestEnemy != null && shortestDistance <= range)
+        {
             target = closestEnemy.transform;
-        } else {
+        }
+        else
+        {
             target = null;
         }
     }
     void Update()
     {
-        if (target == null) {
+        if (target == null)
+        {
             return;
         }
-        if (fireCountdown <= 0) {
+        if (fireCountdown <= 0)
+        {
             Fire();
-            fireCountdown = 1f/stat.FireRate;
+            fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
     }
@@ -57,19 +66,21 @@ public class Turret1 : MonoBehaviour
         GameObject bulletSpawn = Instantiate(bullet, transform.position, Quaternion.identity);
         Bullet bulletProp = bulletSpawn.GetComponent<Bullet>();
 
-        if (bullet != null) {
-            bulletProp.Damage = stat.Damage;
+        if (bullet != null)
+        {
+            bulletProp.Damage = damage;
+            bulletProp.CanSee = canSee;
+            bulletProp.TargetType = "Enemy";
             bulletProp.SetTarget(target);
         }
-
-        // tpmBullet.GetComponent<Bullet>().Damage = stat.Damage;
-        // tpmBullet.GetComponent<Bullet>().SetTarget(target);
     }
-
-    IEnumerator AllowToShoot()
+    public void GetDamaged(int damage)
     {
-        yield return new WaitForSeconds(stat.FireRate);
-        canShoot = true;
+        hitPoint -= damage;
+        if (hitPoint <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
     void OnDrawGizmosSelected()
     {
