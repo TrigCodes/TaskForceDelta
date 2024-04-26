@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Enemies1 : MonoBehaviour
 {
+
     [SerializeField] private Transform playerBase;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private int damage;
     [SerializeField] private float knockback;
-    [SerializeField] public EnemyStat stat;
+
+    [Header("Stat")]
+    [SerializeField] private float moveSpeed = 1.0f;
+    [SerializeField] private int damage = 30;
+    [SerializeField] private int hitpoint = 500;
+
     void Start() {
         GameObject b = GameObject.FindWithTag("Base");
         if (b != null) {
@@ -18,7 +22,6 @@ public class Enemies1 : MonoBehaviour
             Debug.Log("Cannot find Base");
         }
         rb = gameObject.GetComponent<Rigidbody>();
-        stat = new EnemyStat(1.0f, 30, 500);
     }
 
     // Update is called once per frame
@@ -29,11 +32,14 @@ public class Enemies1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet")) {
             GetDamaged(other.gameObject.GetComponent<Bullet>().Damage);
+        } else if (other.gameObject.CompareTag("Base")) {
+            Base.BaseHealth -= damage;
+            Debug.Log("Damage base for: " + damage);
         }
     }
     void GetDamaged(int damage) {
-        stat.Hitpoint -= damage;
-        if (stat.Hitpoint <= 0) {
+        hitpoint -= damage;
+        if (hitpoint <= 0) {
             Destroy(gameObject);
         }
     }
