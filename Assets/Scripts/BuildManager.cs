@@ -14,8 +14,6 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
-    public GameObject turret1Prefab;
-    public GameObject turret2Prefab;
     private TurretBluePrint turretToBuild;
 
     public bool CanBuild {get{return turretToBuild != null;}}

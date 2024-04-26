@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefab;
     [SerializeField] private float timeBetweenWaves = 5.3f;
     [SerializeField] private float countdown = 2f;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject[] spawnPoint;
     [SerializeField] private Text waveCountdownText;
 
     private int waveNumber = 0;
@@ -30,6 +30,8 @@ public class WaveSpawner : MonoBehaviour
         }
     }
     void SpawnEnemy() {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Transform location = spawnPoint[Random.Range(0, spawnPoint.Length)].transform;
+        Transform enemy = enemyPrefab[Random.Range(0,enemyPrefab.Length)].transform;
+        Instantiate(enemy, location.position, location.rotation);
     }
 }
