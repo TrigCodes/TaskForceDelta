@@ -11,6 +11,6 @@ public class TurretBluePrint
     // public int Cost { get; set; }
 
     public GameObject prefab;
-    public int cost;
+    public int initialCost;
 
 }
