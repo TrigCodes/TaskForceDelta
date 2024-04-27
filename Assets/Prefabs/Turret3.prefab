@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5791909553975567355}
   - component: {fileID: 2199358759732650901}
   - component: {fileID: 8704850034283689846}
-  - component: {fileID: 6897808666635797397}
   - component: {fileID: 4151392733276235235}
   m_Layer: 6
   m_Name: Turret3
@@ -122,33 +121,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &6897808666635797397
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3569386711995497864}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 3
 --- !u!114 &4151392733276235235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +140,9 @@ MonoBehaviour:
   damage: 50
   fireRate: 0.5
   canSee: 1
+  upDamage: 5
+  upFireRate: 0.5
+  upShield: 10
+  upDamageCost: 1e0000003200000050000000
+  upFireRateCost: 320000005000000064000000
+  upShieldCost: 1e0000003200000050000000

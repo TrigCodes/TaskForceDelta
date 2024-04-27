@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    BuildManager buildManager;
     [SerializeField] private GameObject bullet;
     private Transform target;
     private float fireCountdown = 0.0f;
@@ -17,8 +18,22 @@ public class Turret : MonoBehaviour
     [SerializeField] private float fireRate = 1.0f;
     [SerializeField] private bool canSee = false;
 
+    [Header("Upgrade Stat")]
+    [SerializeField] private int upDamage = 5;
+    [SerializeField] private float upFireRate = 0.5f;
+    [SerializeField] private int upShield = 10;
+    [SerializeField] private int[] upDamageCost = { 30, 50, 80 };
+    [SerializeField] private int[] upFireRateCost = { 50, 80, 100 };
+    [SerializeField] private int[] upShieldCost = { 30, 50, 80 };
+    private const int MAX_LEVEL = 3;
+    private int lvDamage = 0;
+    private int lvFireRate = 0;
+    private int lvShield = 0;
+
+
     void Start()
     {
+        buildManager = BuildManager.instance;
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
     }
     void UpdateTarget()
@@ -86,5 +101,51 @@ public class Turret : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+    public void UpgradeDamage()
+    {
+        if (lvDamage < MAX_LEVEL)
+        {
+            if (Base.Money < upDamageCost[lvDamage])
+            {
+                Debug.Log("Not enough money");
+                return;
+            }
+            Base.Money -= upDamageCost[lvDamage];
+            damage += upDamage;
+            lvDamage++;
+        }
+    }
+    public void UpgradeFireRate()
+    {
+        if (lvFireRate < MAX_LEVEL)
+        {
+            if (Base.Money < upFireRateCost[lvFireRate])
+            {
+                Debug.Log("Not enough money");
+                return;
+            }
+            Base.Money -= upFireRateCost[lvFireRate];
+            fireRate += upFireRate;
+            lvFireRate++;
+        }
+    }
+    public void UpgradeShield()
+    {
+        if (lvShield < MAX_LEVEL)
+        {
+            if (Base.Money < upShieldCost[lvShield])
+            {
+                Debug.Log("Not enough money");
+                return;
+            }
+            Base.Money -= upShieldCost[lvShield];
+            shield += upShield;
+            lvShield++;
+        }
+    }
+    void OnMouseDown()
+    {
+        buildManager.SelectTurret(this);
     }
 }

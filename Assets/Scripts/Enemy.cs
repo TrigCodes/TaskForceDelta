@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         if (hitpoint <= 0)
         {
             Base.Money += valueGain;
+            WaveSpawner.EnemiesAlive--;
             Destroy(gameObject);
         }
     }
