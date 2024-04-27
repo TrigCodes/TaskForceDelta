@@ -10,7 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 979468907467390696, guid: d47da7c7ab7dae74dbe4450b11e75d3d, type: 3}
       propertyPath: m_Name
-      value: Bullet Variant
+      value: Bullet Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374069883774567528, guid: d47da7c7ab7dae74dbe4450b11e75d3d, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057960255051453602, guid: d47da7c7ab7dae74dbe4450b11e75d3d, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4197024709249583864, guid: d47da7c7ab7dae74dbe4450b11e75d3d, type: 3}
       propertyPath: m_LocalPosition.x

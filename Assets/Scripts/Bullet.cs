@@ -1,3 +1,4 @@
+
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,19 +12,35 @@ public class Bullet : MonoBehaviour
     public int Damage { get; set; }
     public bool CanSee { get; set; }
     public string TargetType { get; set; }
+    public bool ManualControl { get; set; }
 
     void Start()
     {
+        if (ManualControl)
+        {
+            Camera camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            rb = GetComponent<Rigidbody2D>();
+            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector2 direction = mousePos - transform.position;
+            rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+        }
+
         Destroy(gameObject, 5f);
     }
     void Update()
     {
+        if (ManualControl)
+        {
+            return;
+        }
         if (target == null)
         {
             Destroy(gameObject);
             return;
         }
-        Vector2 direction = target.position - transform.position;
+        Vector2 direction;
+        direction = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
         if (direction.magnitude <= distanceThisFrame)
         {

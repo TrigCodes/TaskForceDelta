@@ -29,6 +29,7 @@ public class Turret : MonoBehaviour
     private int lvDamage = 0;
     private int lvFireRate = 0;
     private int lvShield = 0;
+    private bool takeControl = false;
 
 
     void Start()
@@ -64,7 +65,7 @@ public class Turret : MonoBehaviour
     }
     void Update()
     {
-        if (target == null)
+        if (target == null && !takeControl)
         {
             return;
         }
@@ -75,6 +76,7 @@ public class Turret : MonoBehaviour
         }
         fireCountdown -= Time.deltaTime;
     }
+
     // TODO: bullet spawn location needed to change.
     void Fire()
     {
@@ -87,6 +89,8 @@ public class Turret : MonoBehaviour
             bulletProp.CanSee = canSee;
             bulletProp.TargetType = "Enemy";
             bulletProp.SetTarget(target);
+            if (takeControl) bulletProp.ManualControl = takeControl;
+
         }
     }
     public void GetDamaged(int damage)
@@ -144,8 +148,16 @@ public class Turret : MonoBehaviour
             lvShield++;
         }
     }
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        buildManager.SelectTurret(this);
+        if (Input.GetMouseButtonDown(0)){
+            buildManager.SelectTurret(this);
+            takeControl = false;
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            takeControl = true;
+        }
+        Debug.Log("Take control: " + takeControl);
     }
 }
