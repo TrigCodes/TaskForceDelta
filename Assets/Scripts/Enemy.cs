@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int hitpoint = 500;
     [SerializeField] private int valueGain = 10;
     [SerializeField] private bool beSeen = true;
+    [SerializeField] private float damageDelay = 1;
+    private float damageTimer = 0;
     void Start()
     {
         GameObject b = GameObject.FindWithTag("Base");
@@ -33,6 +35,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerBase.position, moveSpeed * Time.deltaTime);
+        damageTimer -= Time.deltaTime;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -40,6 +43,12 @@ public class Enemy : MonoBehaviour
         {
             Base.BaseHealth -= damage;
             Debug.Log("Damage base for: " + damage);
+        }
+        if (other.gameObject.CompareTag("Turret")) {
+            if (damageTimer <= 0) {
+                other.gameObject.GetComponent<Turret>().GetDamaged(damage);
+                damageTimer = damageDelay;
+            }
         }
     }
     public void GetDamaged(int damage)

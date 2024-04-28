@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,12 +30,17 @@ public class Turret : MonoBehaviour
     private int lvDamage = 0;
     private int lvFireRate = 0;
     private int lvShield = 0;
+    private bool takeControl = false;
+    [SerializeField] private bool shieldRegenAllow = true;
+    [SerializeField] private int maxShield;
 
 
     void Start()
     {
         buildManager = BuildManager.instance;
+        maxShield = shield;
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.5f);
+        InvokeRepeating(nameof(ShieldRegeneration), 1, 2);
     }
     void UpdateTarget()
     {
@@ -64,7 +70,7 @@ public class Turret : MonoBehaviour
     }
     void Update()
     {
-        if (target == null)
+        if (target == null && !takeControl)
         {
             return;
         }
@@ -75,6 +81,7 @@ public class Turret : MonoBehaviour
         }
         fireCountdown -= Time.deltaTime;
     }
+
     // TODO: bullet spawn location needed to change.
     void Fire()
     {
@@ -87,15 +94,44 @@ public class Turret : MonoBehaviour
             bulletProp.CanSee = canSee;
             bulletProp.TargetType = "Enemy";
             bulletProp.SetTarget(target);
+            if (takeControl) bulletProp.ManualControl = takeControl;
+
         }
     }
     public void GetDamaged(int damage)
     {
-        hitPoint -= damage;
+        if (shield >= damage)
+        {
+            shield -= damage;
+            return;
+        }
+        else
+        {
+            int excess = damage - shield;
+            hitPoint -= excess;
+            shield = 0;
+        }
+        StartCoroutine(DisableShieldRegen());
+
         if (hitPoint <= 0)
         {
+            CancelInvoke(nameof(ShieldRegeneration));
+            CancelInvoke(nameof(UpdateTarget));
             Destroy(gameObject);
         }
+    }
+    void ShieldRegeneration()
+    {
+        if (shieldRegenAllow && (shield < maxShield))
+        {
+            shield++;
+        }
+    }
+    IEnumerator DisableShieldRegen()
+    {
+        shieldRegenAllow = false;
+        yield return new WaitForSeconds(5);
+        shieldRegenAllow = true;
     }
     void OnDrawGizmosSelected()
     {
@@ -141,11 +177,21 @@ public class Turret : MonoBehaviour
             }
             Base.Money -= upShieldCost[lvShield];
             shield += upShield;
+            maxShield = shield;
             lvShield++;
         }
     }
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        buildManager.SelectTurret(this);
+        if (Input.GetMouseButtonDown(0))
+        {
+            buildManager.SelectTurret(this);
+            takeControl = false;
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            takeControl = true;
+        }
+        Debug.Log("Take control: " + takeControl);
     }
 }
