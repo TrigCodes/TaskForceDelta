@@ -6,7 +6,7 @@ public class MachineGunTurret : Turret
 {
     protected override void Start()
     {
-        // Custom variables for Machine Gun
+        // Custom variables for Machine Gun Turret
         // Overrides values when game starts
         fireRate = 5f;
         range = 5f;

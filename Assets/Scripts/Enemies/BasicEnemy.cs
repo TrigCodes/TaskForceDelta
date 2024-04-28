@@ -2,28 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour
+public class BasicEnemy : Enemy
 {
-    [Header("Refrences")]
-    [SerializeField] private Rigidbody2D enemyRigidBody; // Allows enemy movement
-
-    [Header("Attributes")]
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private int damage = 10;
-
-    private Transform target; // Where enemy will target
     private bool isBouncing = false; // To immitate recoil of attacking
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        GetClosestTarget();
+        // Custom variables for Machine Gun Turret
+        // Overrides values when game starts
+        moveSpeed = 5;
+        damage = 10;
+
+        base.Start();  // Call base to ensure any base initialization happens
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        GetClosestTarget();
+        base.Update();
         if (!isBouncing)
         {
             MoveTowardsTarget();
@@ -54,15 +49,6 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    private void MoveTowardsTarget()
-    {
-        if (target != null)
-        {
-            Vector2 direction = (target.position - transform.position).normalized;
-            enemyRigidBody.velocity = direction * moveSpeed;
-        }
-    }
-
     private IEnumerator BounceBack()
     {
         isBouncing = true;
@@ -70,35 +56,5 @@ public class BasicEnemy : MonoBehaviour
         enemyRigidBody.velocity = direction * moveSpeed;
         yield return new WaitForSeconds(0.5f);
         isBouncing = false;
-    }
-
-    private void GetClosestTarget()
-    {
-        // Get all possible targets in the scene
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
-        GameObject[] cores = GameObject.FindGameObjectsWithTag("Core");
-        List<GameObject> targets = new List<GameObject>(turrets);
-        targets.AddRange(cores);
-
-        Transform bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        foreach (GameObject potentialTarget in targets)
-        {
-            // Check if the potential target is not null (i.e., it hasn't been destroyed)
-            if (potentialTarget != null)
-            {
-                Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
-                {
-                    closestDistanceSqr = dSqrToTarget;
-                    bestTarget = potentialTarget.transform;
-                }
-            }
-        }
-
-        target = bestTarget;
     }
 }

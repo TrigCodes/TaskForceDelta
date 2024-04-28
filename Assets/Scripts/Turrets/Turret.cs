@@ -8,11 +8,10 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firingPoint;
 
-    [Header("Attributes")]
-    [SerializeField] protected float fireRate = 1f;
-    [SerializeField] protected float range = 5f;
-    [SerializeField] protected int damage = 20;
-    [SerializeField] protected int maxHealth = 100;
+    protected float fireRate;
+    protected float range;
+    protected int damage;
+    protected int maxHealth;
     protected float timeSinceLastShot;
 
     // Static reference for player-controlled turret
