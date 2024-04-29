@@ -6,16 +6,6 @@ public class BasicEnemy : Enemy
 {
     private bool isBouncing = false; // To immitate recoil of attacking
 
-    protected override void Start()
-    {
-        // Custom variables for Machine Gun Turret
-        // Overrides values when game starts
-        moveSpeed = 5;
-        damage = 10;
-
-        base.Start();  // Call base to ensure any base initialization happens
-    }
-
     protected override void Update()
     {
         base.Update();

@@ -7,8 +7,9 @@ public abstract class Enemy : MonoBehaviour
     [Header("Refrences")]
     [SerializeField] protected Rigidbody2D enemyRigidBody; // Allows enemy movement
 
-    protected float moveSpeed;
-    protected int damage;
+    [Header("Attributes")]
+    [SerializeField] protected float moveSpeed = 1f;
+    [SerializeField] protected int damage = 10;
 
     protected Transform target; // Where enemy will target
 

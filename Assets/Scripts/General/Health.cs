@@ -19,11 +19,6 @@ public class Health : MonoBehaviour
         
     }
 
-    public void SetMaxHealth(int newMaxHealth)
-    {
-        maxHealth = newMaxHealth;
-    }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage; // Decrease health by damage amount

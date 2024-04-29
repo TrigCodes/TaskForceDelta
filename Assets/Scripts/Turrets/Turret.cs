@@ -8,10 +8,11 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firingPoint;
 
-    protected float fireRate;
-    protected float range;
-    protected int damage;
-    protected int maxHealth;
+    [Header("Attributes")]
+    [SerializeField] protected float fireRate = 1f;
+    [SerializeField] protected float range = 5f;
+    [SerializeField] protected int damage = 10;
+
     protected float timeSinceLastShot;
 
     // Static reference for player-controlled turret
@@ -23,8 +24,6 @@ public abstract class Turret : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        // Set max health
-        this.GetComponent<Health>().SetMaxHealth(maxHealth);
 
         turretCollider = GetComponent<BoxCollider2D>();
         timeSinceLastShot = 0;
@@ -126,7 +125,7 @@ public abstract class Turret : MonoBehaviour
     protected abstract void Shoot(Vector3 targetPosition);
 
     // To see turret view radius in the scene editor
-    void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);

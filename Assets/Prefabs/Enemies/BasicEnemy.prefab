@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2733944818622648743}
   - component: {fileID: 1109085547762174375}
   - component: {fileID: 1179107128308933283}
-  - component: {fileID: 369580206128131609}
   - component: {fileID: 5798118961394579779}
+  - component: {fileID: 369580206128131609}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -150,21 +150,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &369580206128131609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8002981689336925430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7e5f667aeeeb242aa461cc0be6594b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyRigidBody: {fileID: 1109085547762174375}
-  moveSpeed: 2
-  damage: 5
 --- !u!114 &5798118961394579779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +163,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
+--- !u!114 &369580206128131609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8002981689336925430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7e5f667aeeeb242aa461cc0be6594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRigidBody: {fileID: 1109085547762174375}
+  moveSpeed: 5
+  damage: 10
