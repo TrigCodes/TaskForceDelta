@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="BottomHUDPlaceHolder" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;" />
+    <ui:VisualElement name="BottomHUD" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;">
+        <ui:Button text="Damage Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageUpgradeButton" style="width: 330px; position: relative; text-overflow: clip;">
+            <ui:ProgressBar value="0" title="Level Indicator" name="LevelIndicator" high-value="3" />
+        </ui:Button>
+        <ui:Button text="Fire Rate Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FireRateUpgradeButton" style="width: 330px;">
+            <ui:ProgressBar value="0" title="Level Indicator" name="LevelIndicator" high-value="3" />
+        </ui:Button>
+        <ui:Button text="Shield Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShieldUpgradeButton" style="-unity-text-align: middle-center; width: 330px;">
+            <ui:ProgressBar value="0" title="Level Indicator" name="LevelIndicator" high-value="3" />
+        </ui:Button>
+        <ui:Button text="Special Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeButton" style="width: 598px;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(176, 176, 176); flex-direction: row;">
+        <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">
+            <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" style="text-overflow: clip; white-space: nowrap; -unity-text-align: middle-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TimeField" style="flex-grow: 1;">
+            <ui:Label text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="CoreField" style="flex-grow: 1;">
+            <ui:Label text="Core HP" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="LeftBanner" style="flex-grow: 1; position: absolute; left: 0; background-color: rgb(176, 176, 176); width: 150px; height: 1080px;" />
+    <ui:VisualElement name="RightBanner" style="flex-grow: 1; position: absolute; background-color: rgb(176, 176, 176); width: 150px; height: 1080px; right: 0;" />
+</ui:UXML>

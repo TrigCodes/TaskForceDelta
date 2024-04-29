@@ -14,6 +14,12 @@ public class Health : MonoBehaviour
     private GameObject shieldVisual; // Instance of the shield prefab
     private float lastDamageTime; // Time since last damage
 
+    // For Shield upgrades
+    public void UpgradeMaxShield()
+    {
+        maxShield += 20;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

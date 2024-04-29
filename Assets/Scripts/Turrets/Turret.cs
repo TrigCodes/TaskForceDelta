@@ -21,6 +21,12 @@ public abstract class Turret : MonoBehaviour
     // Needed to make sure clicking on turret doesn't trigger shot
     protected BoxCollider2D turretCollider;
 
+    // Upgrade management
+    public int damageLevel = 1;
+    public int fireRateLevel = 1;
+    public int shieldLevel = 1;
+    public const int MaxLevel = 3; // Maximum level for any upgrade
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -45,15 +51,29 @@ public abstract class Turret : MonoBehaviour
 
     protected void OnMouseDown()
     {
+        TurretUpgrades uiManager = FindObjectOfType<TurretUpgrades>();
+
         if (playerControlledTurret == this)
         {
             // Disable player control
             playerControlledTurret = null;
+
+            // Hide UI
+            if (uiManager != null)
+            {
+                uiManager.HideHUD();
+            }
         }
         else
         {
             // Bring player control to this turret
             playerControlledTurret = this;
+
+            // Display information in UI
+            if (uiManager != null)
+            {
+                uiManager.SetCurrentTurret(this);
+            }
         }
     }
 
@@ -129,5 +149,33 @@ public abstract class Turret : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    // Methods to upgrade each aspect
+    public void UpgradeDamage()
+    {
+        if (damageLevel < MaxLevel)
+        {
+            damageLevel++;
+            damage += 20;
+        }
+    }
+
+    public void UpgradeFireRate()
+    {
+        if (fireRateLevel < MaxLevel)
+        {
+            fireRateLevel++;
+            fireRate += 20;
+        }
+    }
+
+    public void UpgradeShield()
+    {
+        if (shieldLevel < MaxLevel)
+        {
+            shieldLevel++;
+            GetComponent<Health>().UpgradeMaxShield();
+        }
     }
 }
