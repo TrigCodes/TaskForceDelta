@@ -6940,6 +6940,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 8002981689336925430, guid: f4aead7b9eaad6342946ae0d0948c2c2, type: 3}
   - {fileID: 1670355407206570737, guid: 2133478abd3e17444855ca80ef144e7c, type: 3}
+  - {fileID: 8600932918924486733, guid: 1923cfd3412924f499e17df5f9cf82e3, type: 3}
   spawnRate: 0.25
 --- !u!1001 &1185117873
 PrefabInstance:

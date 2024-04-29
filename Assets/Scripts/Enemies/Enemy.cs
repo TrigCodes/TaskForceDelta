@@ -24,14 +24,19 @@ public abstract class Enemy : MonoBehaviour
         GetClosestTarget();
     }
 
-    protected virtual void MoveTowardsTarget()
+    protected virtual void MoveTowardsTarget(bool shouldMove = true)
+{
+    if (target != null && shouldMove)
     {
-        if (target != null)
-        {
-            Vector2 direction = (target.position - transform.position).normalized;
-            enemyRigidBody.velocity = direction * moveSpeed;
-        }
+        Vector2 direction = (target.position - transform.position).normalized;
+        enemyRigidBody.velocity = direction * moveSpeed;
     }
+    else
+    {
+        enemyRigidBody.velocity = Vector2.zero; // Stop moving
+    }
+}
+
 
     protected virtual void GetClosestTarget()
     {
