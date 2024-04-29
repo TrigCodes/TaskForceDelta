@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=145383be67f389944a5b3f7e296ca085&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; color: rgb(56, 56, 56); background-image: url(&quot;project://database/Assets/UI%20Toolkit/menuPhoto.jpg?fileID=2800000&amp;guid=28a9ee5167c4efe4aa2dbb7144632f2e&amp;type=3#menuPhoto&quot;); -unity-background-image-tint-color: rgb(255, 134, 134);">
+        <ui:Label tabindex="-1" text="TaskForceDelta" parse-escape-sequences="true" display-tooltip-when-elided="true" class="header" style="justify-content: flex-start; align-self: center; padding-bottom: 100px; height: 256px; width: 533px; align-items: stretch; -unity-text-align: upper-center; -unity-font-style: bold; color: rgb(224, 208, 208); -unity-background-scale-mode: stretch-to-fill; margin-top: 20px; font-size: 200px; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/VerminVibes1989Regular-m77m%20SDF.asset?fileID=11400000&amp;guid=491ecb7d3b3884845adb4259c59e8209&amp;type=2#VerminVibes1989Regular-m77m SDF&quot;);" />
+        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="StartButton" class="button" />
+        <ui:Button text="Levels" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LevelSelect" class="button" />
+        <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="QuitGame" class="button" />
+    </ui:VisualElement>
+</ui:UXML>

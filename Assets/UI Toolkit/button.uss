@@ -1,0 +1,8 @@
+.button {
+    width: 200px;
+    height: 50px;
+    position: relative;
+    flex-direction: column;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/AncientModernTales-a7Po%20SDF.asset?fileID=11400000&guid=5ab92626632b6ac44896c85085536d9e&type=2#AncientModernTales-a7Po SDF");
+    font-size: 28px;
+}
