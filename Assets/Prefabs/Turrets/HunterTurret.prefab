@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
 --- !u!114 &5477058094688829738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 647882444064715556}
-  fireRate: 6
+  fireRate: 5
   range: 5
-  damage: 30
+  damage: 10

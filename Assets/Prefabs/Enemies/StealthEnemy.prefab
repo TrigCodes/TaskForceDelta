@@ -176,5 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 8362687071612080644}
-  moveSpeed: 3
-  damage: 5
+  moveSpeed: 5
+  damage: 10
+  visibilityTimeout: 0.5
+  hiddenOpasity: 0.3

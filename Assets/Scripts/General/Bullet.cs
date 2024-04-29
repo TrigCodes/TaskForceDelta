@@ -7,11 +7,11 @@ public class Bullet : MonoBehaviour
     [Header("Bullet Attributes")]
     [SerializeField] private float speed = 20f; // Speed at which the bullet travels
     [SerializeField] private float maxLifetime = 2f; // Maximum time before the bullet destroys itself
-    [SerializeField] private List<string> targetTags; // List of tags that this bullet can hit
 
+    private List<string> targetTags; // List of tags that this bullet can hit
     private Vector2 direction; // Direction the bullet will move
     private bool isFired = false; // To ensure the direction is only set once
-    private int damage = 5; // Damage the bullet will deal to the enemy
+    private int damage; // Damage the bullet will deal to the enemy
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +35,11 @@ public class Bullet : MonoBehaviour
         damage = newDamage;
     }
 
+    public void SetTargetTags(List<string> tags)
+    {
+        targetTags = new List<string>(tags);
+    }
+
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection; // Set bullet direction
@@ -47,28 +52,20 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    public void SetTargetTags(List<string> tags)
-    {
-        targetTags = new List<string>(tags);
-    }
-
     public void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        foreach (var tag in targetTags)
+        // Check if the object hit is a target
+        if (targetTags.Contains(hitInfo.gameObject.tag))
         {
-            // Check if the object hit is a target
-            if (hitInfo.gameObject.CompareTag(tag))
+            // Try to get the Health component on the target
+            Health targetHealth = hitInfo.GetComponent<Health>(); // Changed according to user's request
+            if (targetHealth != null)
             {
-                // Try to get the Health component on the target
-                Health targetHealth = hitInfo.GetComponent<Health>(); // Changed according to user's request
-                if (targetHealth != null)
-                {
-                    // If the enemy has a Health component, deal damage
-                    targetHealth.TakeDamage(damage);
-                }
-                // Destroy the bullet after hitting the enemy
-                Destroy(gameObject);
+                // If the enemy has a Health component, deal damage
+                targetHealth.TakeDamage(damage);
             }
+            // Destroy the bullet after hitting the enemy
+            Destroy(gameObject);
         }
     }
 }

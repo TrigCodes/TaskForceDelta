@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1445866299078829525}
   m_Layer: 0
   m_Name: RangerEnemy
-  m_TagString: StealthEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 25
 --- !u!114 &1445866299078829525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,8 +177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 1367181472191340195}
   moveSpeed: 3
-  damage: 10
+  damage: 5
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 467133938084100077}
-  shootingRange: 6
-  fireRate: 1
+  shootingRange: 5
+  fireRate: 2.5
