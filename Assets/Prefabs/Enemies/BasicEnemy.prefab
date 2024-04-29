@@ -163,6 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  maxShield: 0
+  shieldRegenTime: 0
+  shieldPrefab: {fileID: 0}
 --- !u!114 &369580206128131609
 MonoBehaviour:
   m_ObjectHideFlags: 0
