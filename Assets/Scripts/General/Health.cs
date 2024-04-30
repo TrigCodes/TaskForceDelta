@@ -14,6 +14,16 @@ public class Health : MonoBehaviour
     private GameObject shieldVisual; // Instance of the shield prefab
     private float lastDamageTime; // Time since last damage
 
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     // For Shield upgrades
     public void UpgradeMaxShield(int incrementPerShieldLevel)
     {
@@ -58,6 +68,13 @@ public class Health : MonoBehaviour
         else
         {
             currentHealth -= damage; // Decrease health by damage amount
+
+            // Update UI if Core
+            if (gameObject.tag != null && gameObject.tag == "Core")
+            {
+                LevelManager.main.HUD.GetComponent<TopHUD>().UpdateCoreHPDisplay(currentHealth);
+            }
+
             if (currentHealth <= 0)
             {
                 Destroy(gameObject); // Destroy the object when health depletes

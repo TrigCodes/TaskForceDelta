@@ -6164,6 +6164,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3479054546659508935, guid: 16d5440953605754fb9bb966b5c0e6c1, type: 3}
   m_PrefabInstance: {fileID: 670923183}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1057673496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5775811426999644045, guid: 834bdff0b60f60f4d8f6b1d9b98cb3f7, type: 3}
+  m_PrefabInstance: {fileID: 842319225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1059094300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6961,7 +6966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialScraps: 500
   HUD: {fileID: 1722008047}
-  spawnPoints:
+  core: {fileID: 1057673496}
+  enemySpawnPoints:
   - {fileID: 1454142812}
   - {fileID: 606247573}
   - {fileID: 1288440593}

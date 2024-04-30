@@ -27,7 +27,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        LevelManager.main.AddScraps(scrapReward);
+        if (LevelManager.main != null)
+        {
+            LevelManager.main.AddScraps(scrapReward);
+        }
     }
 
     protected virtual void MoveTowardsTarget(bool shouldMove = true)

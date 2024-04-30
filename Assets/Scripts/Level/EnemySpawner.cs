@@ -41,6 +41,8 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPoint()
     {
-        return LevelManager.main.spawnPoints[Random.Range(0, LevelManager.main.spawnPoints.Length)].position;
+        return LevelManager.main.enemySpawnPoints[
+            Random.Range(0, LevelManager.main.enemySpawnPoints.Length)
+        ].position;
     }
 }
