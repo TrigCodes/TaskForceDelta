@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TurretUpgrades : MonoBehaviour
+public class UpgradesHUD : MonoBehaviour
 {
-    public UIDocument uiDocument;
+    private UIDocument uiDocument;
     private VisualElement root;
     private VisualElement bottomHUD;
     private Turret currentTurret;
@@ -13,6 +13,9 @@ public class TurretUpgrades : MonoBehaviour
 
     void Start()
     {
+        // Make sure there is a UI Document attached to the same Game Object
+        uiDocument = GetComponent<UIDocument>();
+
         root = uiDocument.rootVisualElement;
 
         // Access the BottomHUD panel
@@ -51,10 +54,18 @@ public class TurretUpgrades : MonoBehaviour
         fireRateLevelProgressBar.value = currentTurret.fireRateLevel;
         shieldLevelProgressBar.value = currentTurret.shieldLevel;
 
-        // Control buttons enabled state
-        damageUpgradeButton.SetEnabled(currentTurret.damageLevel < Turret.MaxLevel);
-        fireRateUpgradeButton.SetEnabled(currentTurret.fireRateLevel < Turret.MaxLevel);
-        shieldUpgradeButton.SetEnabled(currentTurret.shieldLevel < Turret.MaxLevel);
+        damageLevelProgressBar.highValue = currentTurret.damageMaxLevel;
+        fireRateLevelProgressBar.highValue = currentTurret.fireRateMaxLevel;
+        shieldLevelProgressBar.highValue = currentTurret.shieldMaxLevel;
+
+        damageLevelProgressBar.title = currentTurret.damageLevel.ToString();
+        fireRateLevelProgressBar.title = currentTurret.fireRateLevel.ToString();
+        shieldLevelProgressBar.title = currentTurret.shieldLevel.ToString();
+
+        // Disable button if max level reached
+        damageUpgradeButton.SetEnabled(currentTurret.damageLevel < currentTurret.damageMaxLevel);
+        fireRateUpgradeButton.SetEnabled(currentTurret.fireRateLevel < currentTurret.fireRateMaxLevel);
+        shieldUpgradeButton.SetEnabled(currentTurret.shieldLevel < currentTurret.shieldMaxLevel);
     }
 
     public void HideHUD()
@@ -66,19 +77,27 @@ public class TurretUpgrades : MonoBehaviour
     {
         if (currentTurret == null) return;
 
+        bool upgradePerformed = false;
         switch (upgradeType)
         {
             case "damage":
-                currentTurret.UpgradeDamage();
+                upgradePerformed = currentTurret.UpgradeDamage();
                 break;
             case "fireRate":
-                currentTurret.UpgradeFireRate();
+                upgradePerformed = currentTurret.UpgradeFireRate();
                 break;
             case "shield":
-                currentTurret.UpgradeShield();
+                upgradePerformed = currentTurret.UpgradeShield();
                 break;
         }
 
-        UpdateUI();
+        if (upgradePerformed)
+        {
+            UpdateUI();
+        }
+        else
+        {
+            // TODO: Show a message that there are not enough scraps
+        }
     }
 }

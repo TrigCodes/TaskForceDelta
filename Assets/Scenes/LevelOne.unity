@@ -6959,6 +6959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3015ea6ba244b784ca27135c35bca0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialScraps: 500
+  HUD: {fileID: 1722008047}
   spawnPoints:
   - {fileID: 1454142812}
   - {fileID: 606247573}
@@ -10460,6 +10462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722008049}
   - component: {fileID: 1722008050}
+  - component: {fileID: 1722008052}
   - component: {fileID: 1722008051}
   m_Layer: 0
   m_Name: HUD
@@ -10511,7 +10514,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa36a557ebe2384f8958abf1f68d329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1722008050}
+--- !u!114 &1722008052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722008047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c906c33b0bb530e4eb515bb5dc1c7c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1738191428
 PrefabInstance:
   m_ObjectHideFlags: 0

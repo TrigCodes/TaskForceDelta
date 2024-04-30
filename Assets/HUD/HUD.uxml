@@ -14,7 +14,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(176, 176, 176); flex-direction: row;">
         <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">
-            <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" style="text-overflow: clip; white-space: nowrap; -unity-text-align: middle-center;" />
+            <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ScrapsLabel" style="text-overflow: clip; white-space: nowrap; -unity-text-align: middle-center;" />
         </ui:VisualElement>
         <ui:VisualElement name="TimeField" style="flex-grow: 1;">
             <ui:Label text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />

@@ -15,9 +15,9 @@ public class Health : MonoBehaviour
     private float lastDamageTime; // Time since last damage
 
     // For Shield upgrades
-    public void UpgradeMaxShield()
+    public void UpgradeMaxShield(int incrementPerShieldLevel)
     {
-        maxShield += 20;
+        maxShield += incrementPerShieldLevel;
     }
 
     // Start is called before the first frame update

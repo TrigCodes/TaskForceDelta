@@ -22,10 +22,23 @@ public abstract class Turret : MonoBehaviour
     protected BoxCollider2D turretCollider;
 
     // Upgrade management
-    public int damageLevel = 1;
-    public int fireRateLevel = 1;
-    public int shieldLevel = 1;
-    public const int MaxLevel = 3; // Maximum level for any upgrade
+    [Header("Damage Upgrade Attributes")]
+    [SerializeField] public int costPerDamageUpgrade = 50;
+    [SerializeField] public int damageLevel = 0;
+    [SerializeField] protected int incPerDamageLevel = 10;
+    [SerializeField] public int damageMaxLevel = 3;
+
+    [Header("Fire Rate Upgrade Attributes")]
+    [SerializeField] public int costPerFireRateUpgrade = 30;
+    [SerializeField] public int fireRateLevel = 0;
+    [SerializeField] protected int incPerFireRateLevel = 10;
+    [SerializeField] public int fireRateMaxLevel = 3;
+
+    [Header("Shield Upgrade Attributes")]
+    [SerializeField] public int costPerShieldUpgrade = 40;
+    [SerializeField] public int shieldLevel = 0;
+    [SerializeField] protected int incPerShieldLevel = 10;
+    [SerializeField] public int shieldMaxLevel = 3;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -51,7 +64,7 @@ public abstract class Turret : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        TurretUpgrades uiManager = FindObjectOfType<TurretUpgrades>();
+        UpgradesHUD uiManager = FindObjectOfType<UpgradesHUD>();
 
         if (playerControlledTurret == this)
         {
@@ -152,30 +165,39 @@ public abstract class Turret : MonoBehaviour
     }
 
     // Methods to upgrade each aspect
-    public void UpgradeDamage()
+    public bool UpgradeDamage()
     {
-        if (damageLevel < MaxLevel)
+        if (damageLevel < damageMaxLevel && LevelManager.main.SpendScraps(costPerDamageUpgrade))
         {
             damageLevel++;
-            damage += 20;
+            damage += incPerDamageLevel;
+            return true;
         }
+        else
+            return false;
     }
 
-    public void UpgradeFireRate()
+    public bool UpgradeFireRate()
     {
-        if (fireRateLevel < MaxLevel)
+        if (fireRateLevel < fireRateMaxLevel && LevelManager.main.SpendScraps(costPerFireRateUpgrade))
         {
             fireRateLevel++;
-            fireRate += 20;
+            fireRate += incPerFireRateLevel;
+            return true;
         }
+        else
+            return false;
     }
 
-    public void UpgradeShield()
+    public bool UpgradeShield()
     {
-        if (shieldLevel < MaxLevel)
+        if (shieldLevel < shieldMaxLevel && LevelManager.main.SpendScraps(costPerShieldUpgrade))
         {
             shieldLevel++;
-            GetComponent<Health>().UpgradeMaxShield();
+            GetComponent<Health>().UpgradeMaxShield(incPerShieldLevel);
+            return true;
         }
+        else
+            return false;
     }
 }

@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected int damage = 10;
+    [SerializeField] protected int scrapReward = 5;
 
     protected Transform target; // Where enemy will target
 
@@ -24,18 +25,23 @@ public abstract class Enemy : MonoBehaviour
         GetClosestTarget();
     }
 
+    protected virtual void OnDestroy()
+    {
+        LevelManager.main.AddScraps(scrapReward);
+    }
+
     protected virtual void MoveTowardsTarget(bool shouldMove = true)
-{
-    if (target != null && shouldMove)
     {
-        Vector2 direction = (target.position - transform.position).normalized;
-        enemyRigidBody.velocity = direction * moveSpeed;
+        if (target != null && shouldMove)
+        {
+            Vector2 direction = (target.position - transform.position).normalized;
+            enemyRigidBody.velocity = direction * moveSpeed;
+        }
+        else
+        {
+            enemyRigidBody.velocity = Vector2.zero; // Stop moving
+        }
     }
-    else
-    {
-        enemyRigidBody.velocity = Vector2.zero; // Stop moving
-    }
-}
 
 
     protected virtual void GetClosestTarget()
