@@ -13,14 +13,6 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected float range = 5f;
     [SerializeField] protected int damage = 10;
 
-    protected float timeSinceLastShot;
-
-    // Static reference for player-controlled turret
-    protected static Turret playerControlledTurret;
-
-    // Needed to make sure clicking on turret doesn't trigger shot
-    protected BoxCollider2D turretCollider;
-
     // Upgrade management
     [Header("Damage Upgrade Attributes")]
     [SerializeField] public int costPerDamageUpgrade = 50;
@@ -39,6 +31,13 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] public int shieldLevel = 0;
     [SerializeField] protected int incPerShieldLevel = 10;
     [SerializeField] public int shieldMaxLevel = 3;
+
+    protected float timeSinceLastShot;
+    // Static reference for player-controlled turret
+    protected static Turret playerControlledTurret;
+    // Needed to make sure clicking on turret doesn't trigger shot
+    protected BoxCollider2D turretCollider;
+    public bool CanSeeStealthEnemies { get; set; } = false;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -64,7 +63,7 @@ public abstract class Turret : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        UpgradesHUD uiManager = FindObjectOfType<UpgradesHUD>();
+        BottomHUD uiManager = FindObjectOfType<BottomHUD>();
 
         if (playerControlledTurret == this)
         {
@@ -106,7 +105,7 @@ public abstract class Turret : MonoBehaviour
             // Check if the mouse click is not on the turret itself
             if (!turretCollider.bounds.Contains(mousePosition))
             {
-                Shoot(mousePosition);
+                Shoot(mousePosition, CanSeeStealthEnemies);
                 timeSinceLastShot = 0;
             }
         }
@@ -131,7 +130,11 @@ public abstract class Turret : MonoBehaviour
             // Find closest enemy if one exists
             foreach (Collider2D entity in entities)
             {
-                if (entity.gameObject.CompareTag("Enemy"))
+                if (entity.gameObject.CompareTag("Enemy") || 
+                   (CanSeeStealthEnemies && 
+                        entity.gameObject.CompareTag("StealthEnemy")
+                   )
+                )
                 {
                     Vector3 directionToTarget = entity.transform.position - currentPosition;
                     float dSqrToTarget = directionToTarget.sqrMagnitude;
@@ -145,7 +148,7 @@ public abstract class Turret : MonoBehaviour
 
             if (closestEnemy != null && timeSinceLastShot >= 1f / fireRate)
             {
-                Shoot(closestEnemy.position);
+                Shoot(closestEnemy.position, CanSeeStealthEnemies);
                 timeSinceLastShot = 0;
             }
             else
@@ -155,7 +158,7 @@ public abstract class Turret : MonoBehaviour
         }
     }
 
-    protected abstract void Shoot(Vector3 targetPosition);
+    protected abstract void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies);
 
     // To see turret view radius in the scene editor
     protected virtual void OnDrawGizmosSelected()
@@ -200,4 +203,8 @@ public abstract class Turret : MonoBehaviour
         else
             return false;
     }
+
+    public abstract bool UpgradeSpecial();
+    public abstract bool GetSpecialUpgradeDone();
+    public abstract int GetSpecialUpgradeCost();
 }

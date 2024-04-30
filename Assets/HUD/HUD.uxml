@@ -10,7 +10,9 @@
         <ui:Button text="Shield Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShieldUpgradeButton" style="-unity-text-align: middle-center; width: 330px;">
             <ui:ProgressBar value="0" title="Level Indicator" name="LevelIndicator" high-value="3" />
         </ui:Button>
-        <ui:Button text="Special Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeButton" style="width: 598px;" />
+        <ui:Button text="Special Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeButton" style="width: 598px;">
+            <ui:ProgressBar value="3" title="Turret HP" name="TurretHealthBar" high-value="3" />
+        </ui:Button>
     </ui:VisualElement>
     <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(176, 176, 176); flex-direction: row;">
         <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">

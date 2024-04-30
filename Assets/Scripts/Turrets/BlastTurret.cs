@@ -5,22 +5,58 @@ using UnityEngine;
 public class BlastTurret : Turret
 {
     [Header("Blast Turret Specific Attributes")]
-    [SerializeField] private float blastRadius = 3f; // The radius of the explosion
+    [SerializeField] private float blastRadius = 2f; // The radius of the explosion
 
-    protected override void Shoot(Vector3 targetPosition)
+    [Header("Special Upgrade Attributes")]
+    [SerializeField] private int specialUpgradeCost = 100;
+    [SerializeField] private float upgradeBlastRadius = 5f; // New blast radius with upgrade
+
+    private bool specialUpgradeDone = false;
+
+    protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
         // Prepare bullet object and shoot
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        ExplosiveBullet explosiveBullet = bullet.GetComponent<ExplosiveBullet>();
-        if (explosiveBullet != null)
+        ExplosiveBullet explosiveBulletScript = bullet.GetComponent<ExplosiveBullet>();
+        if (explosiveBulletScript != null)
         {
-            explosiveBullet.SetDirection((targetPosition - firingPoint.position).normalized);
-            explosiveBullet.SetDamage(damage); // Set damage for individual enemies hit by the blast
-            explosiveBullet.SetBlastRadius(blastRadius);
+            explosiveBulletScript.SetDirection((targetPosition - firingPoint.position).normalized);
+            explosiveBulletScript.SetDamage(damage); // Set damage for individual enemies hit by the blast
+            explosiveBulletScript.SetBlastRadius(blastRadius);
             // Target enemies
-            explosiveBullet.SetTargetTags(new List<string> { "Enemy"});
+            if (canSeeStealthEnemies)
+            {
+                explosiveBulletScript.SetTargetTags(new List<string> { "Enemy", "StealthEnemy" });
+            }
+            else
+            {
+                explosiveBulletScript.SetTargetTags(new List<string> { "Enemy" });
+            }
             // For collateral damage
-            explosiveBullet.SetCollateralTags(new List<string> {"Enemy", "StealthEnemy" });
+            explosiveBulletScript.SetCollateralTags(new List<string> {"Enemy", "StealthEnemy" });
         }
+    }
+
+    // Increase blast radius
+    public override bool UpgradeSpecial()
+    {
+        if (!specialUpgradeDone && LevelManager.main.SpendScraps(specialUpgradeCost))
+        {
+            blastRadius = upgradeBlastRadius;
+            specialUpgradeDone = true;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public override bool GetSpecialUpgradeDone()
+    {
+        return specialUpgradeDone;
+    }
+
+    public override int GetSpecialUpgradeCost()
+    {
+        return specialUpgradeCost;
     }
 }

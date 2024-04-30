@@ -75,6 +75,12 @@ public class Health : MonoBehaviour
                 LevelManager.main.HUD.GetComponent<TopHUD>().UpdateCoreHPDisplay(currentHealth);
             }
 
+            // Update UI if Turret
+            if (gameObject.tag != null && gameObject.tag == "Turret")
+            {
+                LevelManager.main.HUD.GetComponent<BottomHUD>().UpdateTurretHP(GetComponent<Turret>(), currentHealth);
+            }
+
             if (currentHealth <= 0)
             {
                 Destroy(gameObject); // Destroy the object when health depletes

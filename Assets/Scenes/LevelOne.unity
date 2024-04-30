@@ -4054,6 +4054,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 255951821310510674, guid: ec84f3f29576ca34a93a86cdf9eaba48, type: 3}
+      propertyPath: range
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1379734009526695255, guid: ec84f3f29576ca34a93a86cdf9eaba48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9
@@ -14044,6 +14048,22 @@ PrefabInstance:
     - target: {fileID: 647882444064715556, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141224672799943624, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
+      propertyPath: maxHealth
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141224672799943624, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
+      propertyPath: maxShield
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141224672799943624, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
+      propertyPath: shieldRegenTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477058094688829738, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
+      propertyPath: enhancementRange
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8821418268058919492, guid: 12f1401c4a37f454e80079da3df37318, type: 3}
       propertyPath: m_Name
