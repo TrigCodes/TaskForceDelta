@@ -163,7 +163,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 1379734009526695255}
   fireRate: 5
-  range: 5
+  range: 4
   damage: 20
   cost: 100
   costPerDamageUpgrade: 50

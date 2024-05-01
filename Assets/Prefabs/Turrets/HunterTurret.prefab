@@ -163,5 +163,20 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 647882444064715556}
   fireRate: 5
-  range: 5
+  range: 4
   damage: 10
+  cost: 150
+  costPerDamageUpgrade: 50
+  damageLevel: 0
+  incPerDamageLevel: 10
+  damageMaxLevel: 3
+  costPerFireRateUpgrade: 30
+  fireRateLevel: 0
+  incPerFireRateLevel: 10
+  fireRateMaxLevel: 3
+  costPerShieldUpgrade: 40
+  shieldLevel: 0
+  incPerShieldLevel: 10
+  shieldMaxLevel: 3
+  specialUpgradeCost: 100
+  enhancementRange: 4

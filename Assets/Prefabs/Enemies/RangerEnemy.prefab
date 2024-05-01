@@ -181,7 +181,8 @@ MonoBehaviour:
   enemyRigidBody: {fileID: 1367181472191340195}
   moveSpeed: 3
   damage: 5
+  scrapReward: 5
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 467133938084100077}
-  shootingRange: 5
+  shootingRange: 4
   fireRate: 2.5
