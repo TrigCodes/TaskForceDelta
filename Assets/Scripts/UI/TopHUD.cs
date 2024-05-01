@@ -5,6 +5,7 @@ public class TopHUD : MonoBehaviour
 {
     private UIDocument uiDocument;
     private Label scrapsLabel;
+    private Label waveLabel;
     private ProgressBar coreHealthBar;
     private VisualElement root;
 
@@ -16,6 +17,7 @@ public class TopHUD : MonoBehaviour
         root = uiDocument.rootVisualElement;
 
         scrapsLabel = root.Q<Label>("ScrapsLabel");
+        waveLabel = root.Q<Label>("WaveLabel");
         coreHealthBar = root.Q<ProgressBar>("CoreHealthBar");
 
         // Initial update
@@ -44,6 +46,14 @@ public class TopHUD : MonoBehaviour
         if (coreHealthBar != null)
         {
             coreHealthBar.value = newCoreHP;
+        }
+    }
+
+    public void UpdateWaveDisplay(int currentWave, int totalWaves)
+    {
+        if (waveLabel != null)
+        {
+            waveLabel.text = $"Wave {currentWave} / {totalWaves}";
         }
     }
 }

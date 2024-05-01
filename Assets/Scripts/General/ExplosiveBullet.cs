@@ -84,7 +84,15 @@ public class ExplosiveBullet : MonoBehaviour
         if (targetTags.Contains(hitInfo.gameObject.tag))
         {
             hasHitTarget = true;
+
+            // Stop bullet form moving further
             bulletRenderer.enabled = false; // Hide bullet renderer
+            var colliderComponent = GetComponent<Collider2D>(); // Assuming the bullet uses a Collider2D
+            if (colliderComponent != null)
+            {
+                colliderComponent.enabled = false;
+            }
+
             StartCoroutine(ExplodeAndDestroy()); // Start the explosion and destruction sequence
         }
     }

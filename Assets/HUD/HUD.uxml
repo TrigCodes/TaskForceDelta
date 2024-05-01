@@ -18,8 +18,8 @@
         <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">
             <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ScrapsLabel" style="text-overflow: clip; white-space: normal; -unity-text-align: middle-center;" />
         </ui:VisualElement>
-        <ui:VisualElement name="TimeField" style="flex-grow: 1;">
-            <ui:Label text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+        <ui:VisualElement name="WaveField" style="flex-grow: 1;">
+            <ui:Label text="Wave 0 / 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveLabel" style="-unity-text-align: upper-center;" />
         </ui:VisualElement>
         <ui:VisualElement name="CoreField" style="flex-grow: 1;">
             <ui:ProgressBar value="100" title="Core HP" name="CoreHealthBar" />

@@ -6893,7 +6893,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228eb7e13f28584fb7410666c7794f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 0.25
+  enemyPrefabs:
+  - {fileID: 8002981689336925430, guid: f4aead7b9eaad6342946ae0d0948c2c2, type: 3}
+  - {fileID: 8600932918924486733, guid: 1923cfd3412924f499e17df5f9cf82e3, type: 3}
+  - {fileID: 1670355407206570737, guid: 2133478abd3e17444855ca80ef144e7c, type: 3}
+  waves:
+  - enemyCount: 050000000200000001000000
+    spawnRate: 1
+  - enemyCount: 050000000400000002000000
+    spawnRate: 1
+  - enemyCount: 060000000400000003000000
+    spawnRate: 1.2
+  - enemyCount: 080000000500000004000000
+    spawnRate: 1.3
+  - enemyCount: 0a0000000500000005000000
+    spawnRate: 1.5
+  - enemyCount: 0c0000000700000006000000
+    spawnRate: 1.7
+  - enemyCount: 0c0000000a00000006000000
+    spawnRate: 1.8
+  - enemyCount: 0c0000000a00000008000000
+    spawnRate: 2
+  - enemyCount: 0e0000000c0000000a000000
+    spawnRate: 2.2
+  - enemyCount: 0f0000000f0000000c000000
+    spawnRate: 2.5
+  pauseDuration: 10
 --- !u!1001 &1185117873
 PrefabInstance:
   m_ObjectHideFlags: 0
