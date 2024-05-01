@@ -42,7 +42,7 @@ public class RangerEnemy : Enemy
                 bulletScript.SetDirection((target.position - firingPoint.position).normalized);
                 bulletScript.SetDamage(damage);
                 // Target enemies
-                bulletScript.SetTargetTags(new List<string> { "Turret", "Core" });
+                bulletScript.SetTargetTags(new List<string> { "Turret", "Core", "Wall" });
             }
             timeSinceLastShot = 0;
         }

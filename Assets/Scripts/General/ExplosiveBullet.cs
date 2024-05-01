@@ -93,7 +93,7 @@ public class ExplosiveBullet : MonoBehaviour
     {
         // Spawn Bullet
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(explosion, maxLifetime);
+        Destroy(explosion, maxLifetime/2);
         yield return AnimateExplosion(explosion); // Wait until the explosion animation is complete
         Destroy(gameObject); // Destroy the bullet object after the explosion finishes
     }

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject[] enemyPrefabs;
-
     [Header("Spawning Attributes")]
     [SerializeField] private float spawnRate = 0.25f; // Enemies per second
 
@@ -33,7 +30,9 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         // Choose random enemy type
-        GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        GameObject prefabToSpawn = LevelManager.main.enemyPrefabs[
+            Random.Range(0, LevelManager.main.enemyPrefabs.Length)
+        ];
 
         // Spawn enemy on random enemy spawn
         Instantiate(prefabToSpawn, GetRandomSpawnPoint(), Quaternion.identity);

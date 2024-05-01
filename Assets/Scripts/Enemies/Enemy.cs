@@ -52,8 +52,10 @@ public abstract class Enemy : MonoBehaviour
         // Get all possible targets in the scene
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         GameObject[] cores = GameObject.FindGameObjectsWithTag("Core");
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
         List<GameObject> targets = new List<GameObject>(turrets);
         targets.AddRange(cores);
+        targets.AddRange(walls);
 
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;

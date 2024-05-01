@@ -8,6 +8,8 @@ TagManager:
   - Turret
   - Enemy
   - StealthEnemy
+  - Wall
+  - DamagedWall
   layers:
   - Default
   - TransparentFX

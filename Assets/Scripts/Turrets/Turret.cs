@@ -12,6 +12,7 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected float fireRate = 1f;
     [SerializeField] protected float range = 5f;
     [SerializeField] protected int damage = 10;
+    [SerializeField] public int cost = 150;
 
     // Upgrade management
     [Header("Damage Upgrade Attributes")]
@@ -58,6 +59,23 @@ public abstract class Turret : MonoBehaviour
         else
         {
             TargetAndShoot();
+        }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        BottomHUD uiManager = FindObjectOfType<BottomHUD>();
+
+        if (uiManager != null && playerControlledTurret == this)
+        {
+            // Disable player control
+            playerControlledTurret = null;
+
+            // Hide UI
+            if (uiManager != null)
+            {
+                uiManager.HideHUD();
+            }
         }
     }
 

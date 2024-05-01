@@ -27,4 +27,11 @@
     </ui:VisualElement>
     <ui:VisualElement name="LeftBanner" style="flex-grow: 1; position: absolute; left: 0; background-color: rgb(176, 176, 176); width: 150px; height: 1080px;" />
     <ui:VisualElement name="RightBanner" style="flex-grow: 1; position: absolute; background-color: rgb(176, 176, 176); width: 150px; height: 1080px; right: 0;" />
+    <ui:VisualElement name="RightHUD" style="position: absolute; background-color: rgb(219, 219, 219); width: 150px; height: 771px; right: 0; top: 116px;">
+        <ui:Label text="Deploy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RightHUDTitle" style="-unity-text-align: middle-center; height: 47px;" />
+        <ui:Button text="Machine Gun&#10;Turret&#10;&#10;0 Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MachineGunTurretButton" style="height: 175px;" />
+        <ui:Button text="Hunter Turret&#10;&#10;0 Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HunterTurretButton" style="height: 175px;" />
+        <ui:Button text="Blast Turret&#10;&#10;0 Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BlastTurretButton" style="height: 175px;" />
+        <ui:Button text="Walls&#10;&#10;0 Available" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WallButton" style="height: 175px;" />
+    </ui:VisualElement>
 </ui:UXML>

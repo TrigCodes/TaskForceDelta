@@ -17,7 +17,9 @@ public class BasicEnemy : Enemy
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Turret") || other.gameObject.CompareTag("Core"))
+        if (other.gameObject.CompareTag("Turret") || 
+            other.gameObject.CompareTag("Core") ||
+            other.gameObject.CompareTag("Wall"))
         {
             Health targetHealth = other.gameObject.GetComponent<Health>();
             if (targetHealth != null)
@@ -33,7 +35,9 @@ public class BasicEnemy : Enemy
     // Need to bounce back if squished by other enemies
     void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Turret") || other.gameObject.CompareTag("Core"))
+        if (other.gameObject.CompareTag("Turret") || 
+            other.gameObject.CompareTag("Core") ||
+            other.gameObject.CompareTag("Wall"))
         {
             StartCoroutine(BounceBack());
         }

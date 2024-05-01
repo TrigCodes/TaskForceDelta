@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header("Health Attributes")]
     [SerializeField] private int maxHealth = 100; // Maximum health
     [SerializeField] private int maxShield = 50; // Maximum shield
     [SerializeField] private float shieldRegenTime = 5f; // Time to fully regenerate shield
@@ -13,6 +14,7 @@ public class Health : MonoBehaviour
     private int currentShield; // Current shield
     private GameObject shieldVisual; // Instance of the shield prefab
     private float lastDamageTime; // Time since last damage
+    private Coroutine wallRegenCoroutine; // Coroutine for wall regeneration
 
     public int GetCurrentHealth()
     {
@@ -69,21 +71,37 @@ public class Health : MonoBehaviour
         {
             currentHealth -= damage; // Decrease health by damage amount
 
-            // Update UI if Core
-            if (gameObject.tag != null && gameObject.tag == "Core")
+            // If Wall
+            if (gameObject.tag != null && gameObject.tag == "Wall")
             {
-                LevelManager.main.HUD.GetComponent<TopHUD>().UpdateCoreHPDisplay(currentHealth);
+                UpdateWallOpacity();
+                if (currentHealth <= 0)
+                {
+                    gameObject.tag = "DamagedWall";  // To make enemies not taget the wall
+                    gameObject.GetComponent<Collider2D>().enabled = false; // Enemies avoid wall
+                    if (wallRegenCoroutine != null)
+                        StopCoroutine(wallRegenCoroutine);
+                    float wallRegenTimer = GetComponent<Wall>().wallRegenTimer;
+                    wallRegenCoroutine = StartCoroutine(WallRegeneration(wallRegenTimer));
+                }
             }
-
-            // Update UI if Turret
-            if (gameObject.tag != null && gameObject.tag == "Turret")
+            // Update UI if Core
+            else if (gameObject.tag != null && gameObject.tag == "Core")
             {
-                LevelManager.main.HUD.GetComponent<BottomHUD>().UpdateTurretHP(GetComponent<Turret>(), currentHealth);
+                LevelManager.main.UI.GetComponent<TopHUD>().UpdateCoreHPDisplay(currentHealth);
+            }
+            // Update UI if Turret
+            else if (gameObject.tag != null && gameObject.tag == "Turret")
+            {
+                LevelManager.main.UI.GetComponent<BottomHUD>().UpdateTurretHP(GetComponent<Turret>(), currentHealth);
             }
 
             if (currentHealth <= 0)
             {
-                Destroy(gameObject); // Destroy the object when health depletes
+                if (gameObject.tag != "DamagedWall")
+                {
+                    Destroy(gameObject); // Destroy the object when health depletes
+                }
             }
         }
     }
@@ -108,5 +126,26 @@ public class Health : MonoBehaviour
                 renderer.material.color = color;
             }
         }
+    }
+
+    private void UpdateWallOpacity()
+    {
+        var renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            float opacity = Mathf.Max(0.1f, (float)currentHealth / maxHealth);
+            Color color = renderer.material.color;
+            color.a = opacity;
+            renderer.material.color = color;
+        }
+    }
+
+    private IEnumerator WallRegeneration(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        currentHealth = maxHealth;
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        gameObject.tag = "Wall";
+        UpdateWallOpacity();
     }
 }

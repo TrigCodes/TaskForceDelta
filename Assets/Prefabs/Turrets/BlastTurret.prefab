@@ -165,6 +165,7 @@ MonoBehaviour:
   fireRate: 2.5
   range: 5
   damage: 60
+  cost: 200
   costPerDamageUpgrade: 50
   damageLevel: 0
   incPerDamageLevel: 10
@@ -178,3 +179,5 @@ MonoBehaviour:
   incPerShieldLevel: 10
   shieldMaxLevel: 3
   blastRadius: 2
+  specialUpgradeCost: 100
+  upgradeBlastRadius: 5

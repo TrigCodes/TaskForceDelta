@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,7 +5,7 @@ public class BottomHUD : MonoBehaviour
 {
     private UIDocument uiDocument;
     private VisualElement root;
-    private VisualElement bottomHUD;
+    public VisualElement bottomHUD;
     private Turret currentTurret;
 
     private Button damageUpgradeButton, 

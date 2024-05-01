@@ -181,3 +181,4 @@ MonoBehaviour:
   enemyRigidBody: {fileID: 1109085547762174375}
   moveSpeed: 5
   damage: 10
+  scrapReward: 5

@@ -23,7 +23,7 @@ public class HunterTurret : Turret
         }
     }
 
-    protected void OnDestroy()
+    protected override void OnDestroy()
     {
         if (specialUpgradeDone)
         {
@@ -32,6 +32,8 @@ public class HunterTurret : Turret
                 turret.CanSeeStealthEnemies = false;
             }
         }
+
+        base.OnDestroy();
     }
 
     private void CheckForStealthEnemies()
