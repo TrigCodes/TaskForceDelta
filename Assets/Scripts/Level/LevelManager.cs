@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public int wallCount = 4; // How many wall does player have access to
     [SerializeField] public GameObject UI; // Contains the HUD GameObject
     [SerializeField] public GameObject core; // Contains the base core
-    [SerializeField] public GameObject[] enemyPrefabs;
     [SerializeField] public Transform[] enemySpawnPoints; // Contains all our spawnpoints for the enemy
     [SerializeField] public GameObject[] turretPrefabs;
     [SerializeField] public GameObject wallPrefab;

@@ -5,14 +5,13 @@ using UnityEngine;
 public class StealthEnemy : BasicEnemy
 {
     [Header("StealthEnemy Specfic Attributes")]
-    // Delay in seconds to wait before hiding again
-    [SerializeField] private float visibilityTimeout = 0.5f;
-    [SerializeField] private float hiddenOpasity = 0.3f;
+    [SerializeField] private float hiddenOpacity = 0.3f;
 
     private SpriteRenderer spriteRenderer;
     // To indicate when turret can see Stealth Enemy
     private Coroutine visibilityCoroutine;
     private Color color;
+    private float visibilityTimeout = 0.5f; // Delay in seconds to wait before hiding again
 
     protected override void Start()
     {
@@ -24,7 +23,7 @@ public class StealthEnemy : BasicEnemy
         if (spriteRenderer != null)
         {
             color = spriteRenderer.color;
-            color.a = hiddenOpasity;
+            color.a = hiddenOpacity;
             spriteRenderer.color = color;
         }
     }
