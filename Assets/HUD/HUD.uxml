@@ -34,4 +34,7 @@
         <ui:Button text="Blast Turret&#10;&#10;0 Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BlastTurretButton" style="height: 175px;" />
         <ui:Button text="Walls&#10;&#10;0 Available" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WallButton" style="height: 175px;" />
     </ui:VisualElement>
+    <ui:VisualElement name="AlertBanner" style="background-color: rgb(124, 241, 62); top: 200px; position: absolute; align-self: center;">
+        <ui:Label text="Alert" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AlertLabel" style="-unity-text-align: upper-center; margin-bottom: 4px; margin-left: 16px; margin-right: 16px;" />
+    </ui:VisualElement>
 </ui:UXML>

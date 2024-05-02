@@ -6845,7 +6845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3015ea6ba244b784ca27135c35bca0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialScraps: 500
+  initialScraps: 200
   wallCount: 4
   UI: {fileID: 1722008047}
   core: {fileID: 5775811426999644045, guid: 834bdff0b60f60f4d8f6b1d9b98cb3f7, type: 3}
@@ -10321,6 +10321,7 @@ GameObject:
   - component: {fileID: 1722008052}
   - component: {fileID: 1722008051}
   - component: {fileID: 1722008053}
+  - component: {fileID: 1722008054}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -10393,6 +10394,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c14f41e9637c05c4c897bb1a7185e710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1722008054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722008047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129ee87bd213d0c48aec3c300a0e8aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1738191428

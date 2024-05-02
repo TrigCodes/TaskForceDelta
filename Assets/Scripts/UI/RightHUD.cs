@@ -54,7 +54,7 @@ public class RightHUD : MonoBehaviour
     public void ShowHUD()
     {
         UpdateUI();
-        rightHUD.style.display = DisplayStyle.Flex;;
+        rightHUD.style.display = DisplayStyle.Flex;
     }
 
     public void HideHUD()
@@ -67,8 +67,15 @@ public class RightHUD : MonoBehaviour
         GameObject turretToPlace = FindTurretByName(turretName);
         if (turretToPlace != null)
         {
-            PlaceableTile.selectedTile.PlaceTurret(turretToPlace, FindCostByName(turretName));
-            HideHUD(); // Hide the HUD after placing a turret
+            if(PlaceableTile.selectedTile.PlaceTurret(turretToPlace, FindCostByName(turretName)))
+            {
+                HideHUD(); // Hide the HUD after placing a turret
+            }
+            else
+            {
+                FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for {turretName}");
+            }
+            
         }
     }
 

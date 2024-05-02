@@ -89,17 +89,18 @@ public class PlaceableTile : MonoBehaviour
         uiManager.ShowHUD();
     }
 
-    public void PlaceTurret(GameObject turretPrefab, int cost)
+    public bool PlaceTurret(GameObject turretPrefab, int cost)
     {
         if (turretPrefab != null && LevelManager.main.SpendScraps(cost))
         {
             currentTurret = Instantiate(turretPrefab, transform.position, Quaternion.identity, transform);
             GetComponent<Collider2D>().enabled = false;
             ResetColor();
+            return true;
         }
         else
         {
-            // Send message that you dont have enough
+            return false;
         }
     }
 

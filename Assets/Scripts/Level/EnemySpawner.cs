@@ -119,6 +119,9 @@ public class EnemySpawner : MonoBehaviour
             currentWaveIndex+1,
             waves.Length
         );
+
+        // Send wave alert
+        FindObjectOfType<Alert>().DisplayAlert($"Wave {currentWaveIndex+1}");
     }
 
     void SpawnEnemy()
