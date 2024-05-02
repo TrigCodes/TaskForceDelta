@@ -10323,7 +10323,7 @@ GameObject:
   - component: {fileID: 1722008053}
   - component: {fileID: 1722008054}
   m_Layer: 0
-  m_Name: UI
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

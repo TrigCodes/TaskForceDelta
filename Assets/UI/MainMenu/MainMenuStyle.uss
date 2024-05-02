@@ -1,0 +1,26 @@
+.header {
+    -unity-font: url("project://database/Library/unity%20default%20resources?fileID=10102&guid=0000000000000000e000000000000000&type=0#LegacyRuntime");
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+}
+
+.button {
+    align-self: center;
+    width: 400px;
+    height: 200px;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/AncientModernTales%20SDF.asset?fileID=11400000&guid=9395e9ac5907f3746a8ad5fa1969a972&type=2#AncientModernTales SDF");
+    font-size: 60px;
+    -unity-text-align: middle-center;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}

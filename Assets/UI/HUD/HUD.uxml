@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/UI.uss?fileID=7433441132597879392&amp;guid=62ee2fe11259e9844be77294c5a2a641&amp;type=3#UI" />
     <ui:VisualElement name="BottomHUDPlaceHolder" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;" />
     <ui:VisualElement name="BottomHUD" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;">
         <ui:Button text="Damage Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageUpgradeButton" style="width: 330px; position: relative; text-overflow: clip;">
