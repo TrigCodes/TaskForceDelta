@@ -11,9 +11,7 @@
         <ui:Button text="Shield Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShieldUpgradeButton" style="-unity-text-align: middle-center; width: 330px;">
             <ui:ProgressBar value="0" title="Level Indicator" name="LevelIndicator" high-value="3" />
         </ui:Button>
-        <ui:Button text="Special Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeButton" style="width: 598px;">
-            <ui:ProgressBar value="3" title="Turret HP" name="TurretHealthBar" high-value="3" />
-        </ui:Button>
+        <ui:Button text="Special Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeButton" style="width: 598px;" />
     </ui:VisualElement>
     <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(176, 176, 176); flex-direction: row;">
         <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">
@@ -23,10 +21,14 @@
             <ui:Label text="Wave 0 / 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveLabel" style="-unity-text-align: upper-center;" />
         </ui:VisualElement>
         <ui:VisualElement name="CoreField" style="flex-grow: 1;">
-            <ui:ProgressBar value="100" title="Core HP" name="CoreHealthBar" />
+            <ui:ProgressBar value="100" title="Core HP" name="CoreHealthBar" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); font-size: 14px;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="LeftBanner" style="flex-grow: 1; position: absolute; left: 0; background-color: rgb(176, 176, 176); width: 150px; height: 1080px;" />
+    <ui:VisualElement name="LeftHUD" style="flex-grow: 1; background-color: rgb(176, 176, 176); width: 771px; height: 149px; rotate: 270deg; position: absolute; bottom: 504px; left: -310px; flex-direction: row; align-items: center;">
+        <ui:ProgressBar value="3" name="TurretHealthBar" high-value="3" style="width: 650px;" />
+        <ui:Label tabindex="-1" text="Turret HP" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HealthLabel" style="rotate: 90deg; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); -unity-text-align: upper-center;" />
+    </ui:VisualElement>
     <ui:VisualElement name="RightBanner" style="flex-grow: 1; position: absolute; background-color: rgb(176, 176, 176); width: 150px; height: 1080px; right: 0;" />
     <ui:VisualElement name="RightHUD" style="position: absolute; background-color: rgb(219, 219, 219); width: 150px; height: 771px; right: 0; top: 116px;">
         <ui:Label text="Deploy" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RightHUDTitle" style="-unity-text-align: middle-center; height: 47px;" />

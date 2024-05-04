@@ -6,6 +6,7 @@ public class BottomHUD : MonoBehaviour
     private UIDocument uiDocument;
     private VisualElement root;
     public VisualElement bottomHUD;
+    public VisualElement leftHUD;
     private Turret currentTurret;
 
     private Button damageUpgradeButton, 
@@ -26,6 +27,7 @@ public class BottomHUD : MonoBehaviour
 
         // Access the BottomHUD panel
         bottomHUD = root.Q<VisualElement>("BottomHUD");
+        leftHUD = root.Q<VisualElement>("LeftHUD");
 
         // Get buttons
         damageUpgradeButton = bottomHUD.Q<Button>("DamageUpgradeButton");
@@ -37,7 +39,7 @@ public class BottomHUD : MonoBehaviour
         damageLevelProgressBar = damageUpgradeButton.Q<ProgressBar>("LevelIndicator");
         fireRateLevelProgressBar = fireRateUpgradeButton.Q<ProgressBar>("LevelIndicator");
         shieldLevelProgressBar = shieldUpgradeButton.Q<ProgressBar>("LevelIndicator");
-        turretHPProgressBar = specialUpgradeButton.Q<ProgressBar>("TurretHealthBar");
+        turretHPProgressBar = root.Q<ProgressBar>("TurretHealthBar");
 
         // Assign callbacks
         damageUpgradeButton.clicked += () => UpgradeTurret("damage");
@@ -47,6 +49,7 @@ public class BottomHUD : MonoBehaviour
 
         // Initially hide the BottomHUD panel
         bottomHUD.style.display = DisplayStyle.None;
+        leftHUD.style.display = DisplayStyle.None;
     }
 
     public void SetCurrentTurret(Turret turret)
@@ -54,6 +57,7 @@ public class BottomHUD : MonoBehaviour
         currentTurret = turret;
         UpdateUI();
         bottomHUD.style.display = DisplayStyle.Flex;  // Show the BottomHUD
+        leftHUD.style.display = DisplayStyle.Flex;
     }
 
     private void UpdateUI()
@@ -132,6 +136,7 @@ public class BottomHUD : MonoBehaviour
     public void HideHUD()
     {
         bottomHUD.style.display = DisplayStyle.None;  // Hide the BottomHUD
+        leftHUD.style.display = DisplayStyle.None;
     }
 
     private void UpgradeTurret(string upgradeType)
