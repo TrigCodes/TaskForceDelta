@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Styles/UI.uss?fileID=7433441132597879392&amp;guid=62ee2fe11259e9844be77294c5a2a641&amp;type=3#UI" />
+    <Style src="project://database/Assets/UI/HUD/HUDStyle.uss?fileID=7433441132597879392&amp;guid=62ee2fe11259e9844be77294c5a2a641&amp;type=3#HUDStyle" />
     <ui:VisualElement name="BottomHUDPlaceHolder" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;" />
     <ui:VisualElement name="BottomHUD" style="width: 1620px; height: 193px; bottom: 0; position: absolute; align-items: stretch; background-color: rgb(176, 176, 176); flex-direction: row; align-self: center;">
         <ui:Button text="Damage Upgrade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageUpgradeButton" style="width: 330px; position: relative; text-overflow: clip;">
@@ -35,7 +35,7 @@
         <ui:Button text="Blast Turret&#10;&#10;0 Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BlastTurretButton" style="height: 175px;" />
         <ui:Button text="Walls&#10;&#10;0 Available" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WallButton" style="height: 175px;" />
     </ui:VisualElement>
-    <ui:VisualElement name="AlertBanner" style="background-color: rgb(124, 241, 62); top: 200px; position: absolute; align-self: center;">
-        <ui:Label text="Alert" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AlertLabel" style="-unity-text-align: upper-center; margin-bottom: 4px; margin-left: 16px; margin-right: 16px;" />
+    <ui:VisualElement name="AlertBanner" style="top: 200px; position: absolute; align-self: center; background-image: url(&quot;project://database/Assets/UI%20Toolkit/Images/AlertBackground.png?fileID=2800000&amp;guid=b32d2a6ff50d2764cbd54d57865edb34&amp;type=3#AlertBackground&quot;);">
+        <ui:Label text="Alert" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AlertLabel" style="-unity-text-align: upper-center; margin-bottom: 4px; margin-left: 35px; margin-right: 35px; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); padding-right: 4px; padding-left: 4px; font-size: 16px; -unity-font-style: normal; color: rgb(0, 0, 0); -unity-text-outline-width: 0.5px; -unity-text-outline-color: rgb(0, 0, 0); letter-spacing: 2px; word-spacing: -35px;" />
     </ui:VisualElement>
 </ui:UXML>
