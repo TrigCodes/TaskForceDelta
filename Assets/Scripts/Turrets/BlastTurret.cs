@@ -15,6 +15,8 @@ public class BlastTurret : Turret
 
     protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
+        base.Shoot(targetPosition, canSeeStealthEnemies);
+
         // Prepare bullet object and shoot
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         ExplosiveBullet explosiveBulletScript = bullet.GetComponent<ExplosiveBullet>();

@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8980392, g: 0.26666662, b: 0.7678727, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 426649b44a9284e4a9d4b34686bd7136, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -147,9 +147,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.022297103, y: 0.07471988}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.45480022
 --- !u!114 &7577709494087329250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +182,15 @@ MonoBehaviour:
   moveSpeed: 3
   damage: 5
   scrapReward: 5
+  sprites:
+  - {fileID: 21300000, guid: 426649b44a9284e4a9d4b34686bd7136, type: 3}
+  - {fileID: 21300000, guid: 590598198ba3be54f9aa4655e5748630, type: 3}
+  - {fileID: 21300000, guid: d24210a81c0b4ea4fa7c24257bf3277d, type: 3}
+  - {fileID: 21300000, guid: fdf975dee8ce181479d4b3a40c40e89d, type: 3}
+  - {fileID: 21300000, guid: 689f787fc52c8154fa18adfe4f3ab661, type: 3}
+  - {fileID: 21300000, guid: 22087ead6b9cc6840a9a1790fc802ac0, type: 3}
+  - {fileID: 21300000, guid: d22489c3233a089409fac0a215dc8e0b, type: 3}
+  changeInterval: 0.05
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 467133938084100077}
   shootingRange: 4

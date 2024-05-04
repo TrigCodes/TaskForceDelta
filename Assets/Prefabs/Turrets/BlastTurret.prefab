@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8980392, g: 0.510559, b: 0.21568626, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a056873d1b8d022428ff6aa5d7628294, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.85, y: 0.85}
   m_EdgeRadius: 0
 --- !u!114 &1724396422065473373
 MonoBehaviour:
@@ -178,6 +178,14 @@ MonoBehaviour:
   shieldLevel: 0
   incPerShieldLevel: 10
   shieldMaxLevel: 3
+  sprites:
+  - {fileID: 21300000, guid: a056873d1b8d022428ff6aa5d7628294, type: 3}
+  - {fileID: 21300000, guid: 7c4c6e6074dedba42845e0c415b79fa9, type: 3}
+  - {fileID: 21300000, guid: 17693eaf9903bae4399d8685ba45b9fe, type: 3}
+  - {fileID: 21300000, guid: decca923bf5bcd841bd59204c7d35e81, type: 3}
+  - {fileID: 21300000, guid: 29109d85a2cc6584ab143fcb022fce30, type: 3}
+  - {fileID: 21300000, guid: 10c1c38e13bd1ad4ebf2ac1b4601d9dc, type: 3}
+  changeInterval: 0.00005
   blastRadius: 2
   specialUpgradeCost: 100
   upgradeBlastRadius: 5

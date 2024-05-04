@@ -107,10 +107,16 @@ public class PlaceableTile : MonoBehaviour
     public void PlaceWall()
     {
         GameObject wallPrefab = LevelManager.main.wallPrefab;
-        if (wallPrefab != null && LevelManager.main.SpendWall())
+        GameObject tilePrefab = LevelManager.main.tilePrefab;
+        if (wallPrefab != null && LevelManager.main.SpendWall() &&
+            tilePrefab != null)
         {
+            GameObject tile = Instantiate(tilePrefab, transform.position, Quaternion.identity);
+            tile.GetComponent<SpriteRenderer>().sprite = LevelManager.main.replaceTilePrefabSprite;
+
             Instantiate(wallPrefab, transform.position, Quaternion.identity);
             ResetColor();
+
             Destroy(gameObject);
         }
     }

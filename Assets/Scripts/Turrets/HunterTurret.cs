@@ -81,6 +81,7 @@ public class HunterTurret : Turret
 
             if (closestEnemy != null && timeSinceLastShot >= 1f / fireRate)
             {
+                RotateTowards(closestEnemy.position);
                 Shoot(closestEnemy.position, true);
                 timeSinceLastShot = 0;
             }
@@ -93,6 +94,8 @@ public class HunterTurret : Turret
 
     protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
+        base.Shoot(targetPosition, canSeeStealthEnemies);
+
         // Prepare bullet object and shoot
         GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();

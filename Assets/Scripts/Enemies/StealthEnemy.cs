@@ -7,7 +7,6 @@ public class StealthEnemy : BasicEnemy
     [Header("StealthEnemy Specfic Attributes")]
     [SerializeField] private float hiddenOpacity = 0.3f;
 
-    private SpriteRenderer spriteRenderer;
     // To indicate when turret can see Stealth Enemy
     private Coroutine visibilityCoroutine;
     private Color color;
@@ -16,8 +15,6 @@ public class StealthEnemy : BasicEnemy
     protected override void Start()
     {
         base.Start();
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         // Initially make sprite semi-invisiable
         if (spriteRenderer != null)

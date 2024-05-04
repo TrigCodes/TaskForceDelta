@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public Transform[] enemySpawnPoints; // Contains all our spawnpoints for the enemy
     [SerializeField] public GameObject[] turretPrefabs;
     [SerializeField] public GameObject wallPrefab;
+    [SerializeField] public GameObject tilePrefab;
+    [SerializeField] public Sprite replaceTilePrefabSprite;
     
     public static LevelManager main; // To easily access LevelManager from anywhere
     public int TotalScraps { get; private set; }
@@ -37,7 +39,10 @@ public class LevelManager : MonoBehaviour
     public void AddScraps(int amount)
     {
         TotalScraps += amount;
-        UI.GetComponent<TopHUD>().UpdateScrapsDisplay(TotalScraps); // Update UI
+        if (UI != null)
+        {
+            UI.GetComponent<TopHUD>().UpdateScrapsDisplay(TotalScraps); // Update UI
+        }
     }
 
     // Return false if player doesn't have enough

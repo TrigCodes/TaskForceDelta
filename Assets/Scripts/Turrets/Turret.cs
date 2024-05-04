@@ -33,16 +33,30 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected int incPerShieldLevel = 10;
     [SerializeField] public int shieldMaxLevel = 3;
 
+    [Header("Annimaion")]
+    [SerializeField] private Sprite[] sprites; // Array to hold the sprites
+    [SerializeField] private float changeInterval = 1.0f; // Interval in seconds between sprite changes
+
     protected float timeSinceLastShot;
     // Static reference for player-controlled turret
     protected static Turret playerControlledTurret;
     // Needed to make sure clicking on turret doesn't trigger shot
     protected BoxCollider2D turretCollider;
     public bool CanSeeStealthEnemies { get; set; } = false;
+    protected SpriteRenderer spriteRenderer; // SpriteRenderer component on the GameObject
+    protected Coroutine spriteAnimationCoroutine;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        // For animation
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        Rigidbody2D turretRigidBody = GetComponent<Rigidbody2D>();
+        if (turretRigidBody != null)
+        {
+            turretRigidBody.freezeRotation = true; // Freeze rotation in physics calculations
+        }
 
         turretCollider = GetComponent<BoxCollider2D>();
         timeSinceLastShot = 0;
@@ -113,16 +127,14 @@ public abstract class Turret : MonoBehaviour
         mousePosition.z = transform.position.z; // Z needs to be on the same plane as the turret
 
         // Rotate turret to follow the mouse as the mouse is moving around
-        Vector3 direction = mousePosition - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        RotateTowards(mousePosition);
 
         // Check to see if mouse is clicked
         if (Input.GetMouseButton(0) && timeSinceLastShot >= 1f / fireRate)
         {
             // Check if the mouse click is not on the turret itself
             if (!turretCollider.bounds.Contains(mousePosition))
-            {
+            {               
                 Shoot(mousePosition, CanSeeStealthEnemies);
                 timeSinceLastShot = 0;
             }
@@ -166,6 +178,7 @@ public abstract class Turret : MonoBehaviour
 
             if (closestEnemy != null && timeSinceLastShot >= 1f / fireRate)
             {
+                RotateTowards(closestEnemy.position);
                 Shoot(closestEnemy.position, CanSeeStealthEnemies);
                 timeSinceLastShot = 0;
             }
@@ -176,7 +189,22 @@ public abstract class Turret : MonoBehaviour
         }
     }
 
-    protected abstract void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies);
+    protected virtual void RotateTowards(Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 270f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    protected virtual void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
+    {
+        // If the animation is already running, stop it
+        if (spriteAnimationCoroutine != null)
+            StopCoroutine(spriteAnimationCoroutine);
+
+        // Restart the animation coroutine
+        spriteAnimationCoroutine = StartCoroutine(CycleSprites());
+    }
 
     // To see turret view radius in the scene editor
     protected virtual void OnDrawGizmosSelected()
@@ -225,4 +253,34 @@ public abstract class Turret : MonoBehaviour
     public abstract bool UpgradeSpecial();
     public abstract bool GetSpecialUpgradeDone();
     public abstract int GetSpecialUpgradeCost();
+
+    protected IEnumerator CycleSprites()
+    {
+        int index = 0;
+        bool goingForward = true;
+
+        while (true) // Loop until the full cycle is complete
+        {
+            spriteRenderer.sprite = sprites[index];
+
+            if (goingForward)
+            {
+                if (index < sprites.Length - 1)
+                    index++;
+                else
+                    goingForward = false;
+            }
+            else
+            {
+                if (index > 0)
+                    index--;
+                else
+                    break; // Exit the loop once the cycle is complete
+            }
+
+            yield return new WaitForSeconds(changeInterval);
+        }
+
+        spriteAnimationCoroutine = null; // Reset the coroutine reference when done
+    }
 }

@@ -12,11 +12,27 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int damage = 10;
     [SerializeField] protected int scrapReward = 5;
 
+    [Header("Annimaion")]
+    [SerializeField] private Sprite[] sprites; // Array to hold the sprites
+    [SerializeField] private float changeInterval = 1.0f; // Interval in seconds between sprite changes
+
     protected Transform target; // Where enemy will target
+    protected SpriteRenderer spriteRenderer; // SpriteRenderer component on the GameObject
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        // For animation
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        if (sprites.Length > 0)
+        {
+            StartCoroutine(CycleSprites()); // Start the coroutine if there are sprites
+        }
+        if (enemyRigidBody != null)
+        {
+            enemyRigidBody.freezeRotation = true; // Freeze rotation in physics calculations
+        }
+
         GetClosestTarget();
     }
 
@@ -77,5 +93,33 @@ public abstract class Enemy : MonoBehaviour
         }
 
         target = bestTarget;
+    }
+
+    protected virtual IEnumerator CycleSprites()
+    {
+        int index = 0; // Start with the first sprite
+        bool goingBack = false;
+
+        while (true) // Loop indefinitely
+        {
+            spriteRenderer.sprite = sprites[index];
+            if (goingBack)
+            {
+                index--;
+                if (index <= 0)
+                {
+                    goingBack = false;
+                }
+            }
+            else
+            {
+                index++;
+                if (index >= sprites.Length - 1)
+                {
+                    goingBack = true;
+                }
+            }
+            yield return new WaitForSeconds(changeInterval); 
+        }
     }
 }

@@ -133,7 +133,7 @@ public class Health : MonoBehaviour
         var renderer = GetComponent<Renderer>();
         if (renderer != null)
         {
-            float opacity = Mathf.Max(0.1f, (float)currentHealth / maxHealth);
+            float opacity = Mathf.Max(0.3f, (float)currentHealth / maxHealth);
             Color color = renderer.material.color;
             color.a = opacity;
             renderer.material.color = color;
