@@ -251,6 +251,7 @@ public abstract class Turret : MonoBehaviour
     }
 
     public abstract bool UpgradeSpecial();
+    public abstract string GetSpecialInfoText();
     public abstract bool GetSpecialUpgradeDone();
     public abstract int GetSpecialUpgradeCost();
 

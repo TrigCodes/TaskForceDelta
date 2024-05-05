@@ -3,6 +3,14 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
 }
 
 .unity-progress-bar__progress {
@@ -10,4 +18,29 @@
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
+}
+
+.level-indicator {
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&guid=093b66f5ef86ed74aac6d186e3147287&type=2#JoystixMonospace SDF");
+    padding-top: 40px;
+}
+
+.upgrade-button {
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/VerminVibes%20SDF.asset?fileID=11400000&guid=f55dcf71301df8847814b4b2c2ba01aa&type=2#VerminVibes SDF");
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    word-spacing: 20px;
+    -unity-font-style: normal;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.button:hover {
+    -unity-background-image-tint-color: rgba(157, 177, 148, 0.39);
 }

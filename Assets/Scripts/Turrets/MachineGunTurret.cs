@@ -55,6 +55,11 @@ public class MachineGunTurret : Turret
             return false;;
     }
 
+    public override string GetSpecialInfoText()
+    {
+        return $"Increase Fire Rate By {upgradeFireRateLevel} Levels";
+    }
+
     public override bool GetSpecialUpgradeDone()
     {
         return specialUpgradeDone;

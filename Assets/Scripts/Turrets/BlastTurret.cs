@@ -52,6 +52,11 @@ public class BlastTurret : Turret
             return false;
     }
 
+    public override string GetSpecialInfoText()
+    {
+        return "Increase Blast Radius";
+    }
+
     public override bool GetSpecialUpgradeDone()
     {
         return specialUpgradeDone;

@@ -118,6 +118,11 @@ public class HunterTurret : Turret
         return false;
     }
 
+    public override string GetSpecialInfoText()
+    {
+        return "Surrounding Turrets Can See Stealth Enemies";
+    }
+
     // Make nearby turrets be able to see stealth turrets
     private void EnhanceNearbyTurrets()
     {
