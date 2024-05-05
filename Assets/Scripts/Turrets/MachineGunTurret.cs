@@ -52,7 +52,10 @@ public class MachineGunTurret : Turret
             return true;
         }
         else
-            return false;;
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
+            return false;
+        }
     }
 
     public override string GetSpecialInfoText()

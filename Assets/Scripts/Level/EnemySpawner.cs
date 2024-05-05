@@ -95,7 +95,8 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            // TODO: Implement win condition
+            // All waves are completed, trigger the win condition
+            LevelManager.main.WinLevel();
         }
     }
 

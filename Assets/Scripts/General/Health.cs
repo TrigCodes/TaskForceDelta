@@ -98,7 +98,11 @@ public class Health : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                if (gameObject.tag != "DamagedWall")
+                if (gameObject.tag == "Core")
+                {
+                    LevelManager.main.LoseLevel();
+                }
+                else if (gameObject.tag != "DamagedWall")
                 {
                     Destroy(gameObject); // Destroy the object when health depletes
                 }

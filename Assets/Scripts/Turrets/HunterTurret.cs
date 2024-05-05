@@ -115,7 +115,11 @@ public class HunterTurret : Turret
             specialUpgradeDone = true;
             return true;
         }
-        return false;
+        else
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
+            return false;
+        }
     }
 
     public override string GetSpecialInfoText()

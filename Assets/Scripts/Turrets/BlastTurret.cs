@@ -49,7 +49,10 @@ public class BlastTurret : Turret
             return true;
         }
         else
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
             return false;
+        }
     }
 
     public override string GetSpecialInfoText()

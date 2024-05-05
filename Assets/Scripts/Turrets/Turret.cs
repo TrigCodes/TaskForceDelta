@@ -228,7 +228,10 @@ public abstract class Turret : MonoBehaviour
             return true;
         }
         else
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
             return false;
+        }
     }
 
     public bool UpgradeFireRate()
@@ -240,7 +243,10 @@ public abstract class Turret : MonoBehaviour
             return true;
         }
         else
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
             return false;
+        }
     }
 
     public bool UpgradeShield()
@@ -252,7 +258,10 @@ public abstract class Turret : MonoBehaviour
             return true;
         }
         else
+        {
+            FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for Upgrade");
             return false;
+        }
     }
 
     private void CheckForStealthEnemies()

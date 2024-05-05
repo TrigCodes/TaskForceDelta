@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Required for managing scenes
 
 public class LevelManager : MonoBehaviour
 {
@@ -33,7 +34,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     public void AddScraps(int amount)
@@ -65,5 +69,17 @@ public class LevelManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    // Method to handle winning the level
+    public void WinLevel()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    // Method to handle losing the level
+    public void LoseLevel()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
