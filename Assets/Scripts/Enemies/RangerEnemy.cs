@@ -54,6 +54,9 @@ public class RangerEnemy : Enemy
                 }
             }
             timeSinceLastShot = 0;
+
+            // Play audio
+            AudioManager.main.PlayAudio(attackAudio, transform, 1);
         }
         else
         {

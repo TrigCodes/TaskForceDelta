@@ -6,6 +6,8 @@ public abstract class Enemy : MonoBehaviour
 {
     [Header("Refrences")]
     [SerializeField] protected Rigidbody2D enemyRigidBody; // Allows enemy movement
+    [SerializeField] protected AudioClip attackAudio;
+    [SerializeField] protected AudioClip deathAudio;
 
     [Header("Attributes")]
     [SerializeField] protected float moveSpeed = 1f;
@@ -47,6 +49,9 @@ public abstract class Enemy : MonoBehaviour
         {
             LevelManager.main.AddScraps(scrapReward);
         }
+
+        // Play audio
+        AudioManager.main.PlayAudio(deathAudio, transform, 1);
     }
 
     protected virtual void MoveTowardsTarget(bool shouldMove = true)

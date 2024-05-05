@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 647882444064715556}
+  shootAudio: {fileID: 8300000, guid: 2e5f2cc57a014c947b294cd8de62bf7f, type: 3}
+  deathAudio: {fileID: 0}
   fireRate: 2
   range: 4
   damage: 15

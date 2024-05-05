@@ -29,6 +29,9 @@ public class BasicEnemy : Enemy
                 // Bounce back to immitate attacking again
                 StartCoroutine(BounceBack());
             }
+
+            // Play audio
+            AudioManager.main.PlayAudio(attackAudio, transform, 1);
         }
     }
 

@@ -7,6 +7,7 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager main;
+    [Header("Refrences")]
     [SerializeField] private AudioSource soundObject;
     [SerializeField] private AudioSource musicObject;
     [SerializeField] private AudioMixer audioMixer;
