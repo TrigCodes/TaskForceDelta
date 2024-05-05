@@ -93,7 +93,7 @@ public class Health : MonoBehaviour
             // Update UI if Turret
             else if (gameObject.tag != null && gameObject.tag == "Turret")
             {
-                LevelManager.main.UI.GetComponent<BottomHUD>().UpdateTurretHP(GetComponent<Turret>(), currentHealth);
+                LevelManager.main.UI.GetComponent<BottomHUD>().UpdateTurretHP(GetComponent<Turret>(), currentHealth, true);
             }
 
             if (currentHealth <= 0)

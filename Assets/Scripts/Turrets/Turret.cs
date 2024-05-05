@@ -74,6 +74,11 @@ public abstract class Turret : MonoBehaviour
         {
             TargetAndShoot();
         }
+
+        if (CanSeeStealthEnemies)
+        {
+            CheckForStealthEnemies();
+        }
     }
 
     protected virtual void OnDestroy()
@@ -248,6 +253,22 @@ public abstract class Turret : MonoBehaviour
         }
         else
             return false;
+    }
+
+    private void CheckForStealthEnemies()
+    {
+        Collider2D[] entities = Physics2D.OverlapCircleAll(transform.position, range);
+        foreach (var entity in entities)
+        {
+            if (entity.CompareTag("StealthEnemy"))
+            {
+                StealthEnemy enemy = entity.GetComponent<StealthEnemy>();
+                if (enemy != null)
+                {
+                    enemy.EnableVisibility();
+                }
+            }
+        }
     }
 
     public abstract bool UpgradeSpecial();

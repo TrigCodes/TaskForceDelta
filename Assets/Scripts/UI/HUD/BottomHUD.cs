@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +19,8 @@ public class BottomHUD : MonoBehaviour
                         shieldLevelProgressBar,
                         turretHPProgressBar;
     private Label specialUpgradeInfoLabel;
+    private Coroutine shakeCoroutine;
+    private Vector3 originalShakePosition;
 
     void Start()
     {
@@ -128,13 +131,45 @@ public class BottomHUD : MonoBehaviour
         }
     }
 
-    public void UpdateTurretHP(Turret turret, int newHealth)
+    public void UpdateTurretHP(Turret turret, int newHealth, bool tookHit = false)
     {
         if (turret == currentTurret)
         {
             turretHPProgressBar.highValue = currentTurret.GetComponent<Health>().GetMaxHealth();
             turretHPProgressBar.value = newHealth;
+            
+            if (tookHit)
+            {
+                if (shakeCoroutine != null)
+                {
+                    StopCoroutine(shakeCoroutine);
+                    turretHPProgressBar.transform.position = originalShakePosition; // Reset position on stop
+                }
+                shakeCoroutine = StartCoroutine(ShakeHealthBar());
+            }
         }
+    }
+
+    private IEnumerator ShakeHealthBar()
+    {
+        float shakeDuration = 0.4f; // duration of the shake in seconds
+        float shakeMagnitude = 8f; // magnitude of the shake
+
+        float elapsed = 0.0f;
+        while (elapsed < shakeDuration)
+        {
+            float x = Random.Range(-1f, 1f) * shakeMagnitude;
+            float y = Random.Range(-1f, 1f) * shakeMagnitude;
+            turretHPProgressBar.transform.position = new Vector3(originalShakePosition.x + x, 
+                                                                 originalShakePosition.y + y, 
+                                                                 originalShakePosition.z);
+
+            elapsed += Time.deltaTime;
+            yield return null; // wait for the next frame
+        }
+
+        // Return the progress bar to its original position
+        turretHPProgressBar.transform.position = originalShakePosition;
     }
 
     public void HideHUD()
