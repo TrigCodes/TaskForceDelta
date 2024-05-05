@@ -15,15 +15,15 @@
             <ui:Label tabindex="-1" text="Special Upgrade Text" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SpecialUpgradeText" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); font-size: 13px; -unity-text-align: middle-center; padding-top: 90px; word-spacing: 0; -unity-font-style: italic;" />
         </ui:Button>
     </ui:VisualElement>
-    <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(176, 176, 176); flex-direction: row;">
-        <ui:VisualElement name="ScrapsField" style="flex-grow: 1; flex-direction: column;">
-            <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ScrapsLabel" style="text-overflow: clip; white-space: normal; -unity-text-align: middle-center;" />
+    <ui:VisualElement name="TopHUD" style="width: 1620px; height: 116px; align-self: center; position: absolute; top: 0; background-color: rgb(25, 54, 42); flex-direction: row; border-left-color: rgb(248, 249, 214); border-right-color: rgb(248, 249, 214); border-top-color: rgb(248, 249, 214); border-bottom-color: rgb(248, 249, 214); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; align-items: center; justify-content: space-between;">
+        <ui:VisualElement name="ScrapsField" class="top-field" style="flex-grow: 1; flex-direction: column; align-items: stretch; justify-content: center; width: 536.5px;">
+            <ui:Label text="Scraps" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ScrapsLabel" style="text-overflow: clip; white-space: normal; -unity-text-align: middle-center; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/VerminVibes%20SDF.asset?fileID=11400000&amp;guid=f55dcf71301df8847814b4b2c2ba01aa&amp;type=2#VerminVibes SDF&quot;); font-size: 30px; -unity-font-style: normal; color: rgb(255, 247, 211);" />
         </ui:VisualElement>
-        <ui:VisualElement name="WaveField" style="flex-grow: 1;">
-            <ui:Label text="Wave 0 / 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveLabel" style="-unity-text-align: upper-center;" />
+        <ui:VisualElement name="WaveField" class="top-field" style="flex-grow: 1; align-items: stretch; justify-content: center; margin-left: 536.5px; top: 0; left: 0;">
+            <ui:Label text="Wave 0 / 10" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveLabel" style="-unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/VerminVibes%20SDF.asset?fileID=11400000&amp;guid=f55dcf71301df8847814b4b2c2ba01aa&amp;type=2#VerminVibes SDF&quot;); font-size: 30px; color: rgb(255, 247, 211); word-spacing: 50px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="CoreField" style="flex-grow: 1;">
-            <ui:ProgressBar value="100" title="Core HP" name="CoreHealthBar" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); font-size: 14px;" />
+        <ui:VisualElement name="CoreField" class="top-field" style="flex-grow: 1; align-items: stretch; justify-content: space-around; margin-left: 1073px;">
+            <ui:ProgressBar value="100" title="Core HP" name="CoreHealthBar" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/Fonts/JoystixMonospace%20SDF.asset?fileID=11400000&amp;guid=093b66f5ef86ed74aac6d186e3147287&amp;type=2#JoystixMonospace SDF&quot;); font-size: 12px; margin-right: 50px; margin-left: 50px; -unity-font-style: bold; -unity-text-align: lower-center; color: rgb(0, 0, 0); letter-spacing: 30px; word-spacing: 30px;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="LeftBanner" style="flex-grow: 1; position: absolute; left: 0; background-color: rgb(25, 54, 42); width: 150px; height: 1080px;" />
