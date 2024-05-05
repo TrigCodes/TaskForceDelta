@@ -40,11 +40,11 @@ public class RightHUD : MonoBehaviour
         int wallCount = LevelManager.main.wallCount;
 
         // Update button texts with the retrieved costs
-        machineGunTurretButton.text = $"Machine Gun \nTurret\n\n{machineGunTurretCost} Scraps";
-        hunterTurretButton.text = $"Hunter Turret\n\n{hunterTurretCost} Scraps";
-        blastTurretButton.text = $"Blast Turret\n\n{blastTurretCost} Scraps";
+        machineGunTurretButton.text = $"Machine\nGun\nTurret\n\n{machineGunTurretCost} Scraps";
+        hunterTurretButton.text = $"Hunter\nTurret\n\n{hunterTurretCost} Scraps";
+        blastTurretButton.text = $"Blast\nTurret\n\n{blastTurretCost} Scraps";
 
-        wallButton.text = $"Walls\n\n{wallCount} Available";
+        wallButton.text = $"Walls\n\n{wallCount} Left";
         if (wallCount <= 0)
         {
             wallButton.SetEnabled(false);
