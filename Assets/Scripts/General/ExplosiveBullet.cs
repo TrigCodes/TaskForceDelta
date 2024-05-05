@@ -99,45 +99,29 @@ public class ExplosiveBullet : MonoBehaviour
 
     private IEnumerator ExplodeAndDestroy()
     {
-        // Spawn Bullet
+        // Spawn the explosion at full size
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(explosion, maxLifetime/2);
-        yield return AnimateExplosion(explosion); // Wait until the explosion animation is complete
+        explosion.transform.localScale = new Vector3(blastRadius, blastRadius, 1);
+        
+        // Apply damage immediately
+        DealDamage();
+
+        // Animate explosion shrinking and then destroy
+        yield return AnimateExplosion(explosion);
+
         Destroy(gameObject); // Destroy the bullet object after the explosion finishes
     }
 
     private IEnumerator AnimateExplosion(GameObject explosion)
     {
-        float duration = 1.5f;
-        
-        float halfDuration = duration / 2;
+        float duration = 0.5f; // Duration of the fade out and shrink animation
+        float timer = duration;
         SpriteRenderer explosionRenderer = explosion.GetComponent<SpriteRenderer>();
-        explosion.transform.localScale = Vector3.zero;
 
-        // Animate explosion growing
-        float timer = halfDuration;
         while (timer > 0)
         {
-            float scale = Mathf.Lerp(0, blastRadius, 1 - (timer / halfDuration));
-            float alpha = Mathf.Lerp(0, 1, 1 - (timer / halfDuration));
-            explosionRenderer.color = new Color(
-                explosionRenderer.color.r, 
-                explosionRenderer.color.g, 
-                explosionRenderer.color.b, 
-                alpha);
-            explosion.transform.localScale = new Vector3(scale, scale, 1);
-            timer -= Time.deltaTime;
-        }
-
-        // Damage enemies during explosion
-        DealDamage();
-
-        // Animate explosion shrinking and fading out
-        timer = halfDuration;
-        while (timer > 0)
-        {
-            float scale = Mathf.Lerp(blastRadius, 0, 1 - (timer / halfDuration));
-            float alpha = Mathf.Lerp(1, 0, 1 - (timer / halfDuration));
+            float scale = Mathf.Lerp(0, blastRadius*2, timer / duration);
+            float alpha = Mathf.Lerp(0, 1, timer / duration);
             explosionRenderer.color = new Color(
                 explosionRenderer.color.r, 
                 explosionRenderer.color.g, 
@@ -148,7 +132,7 @@ public class ExplosiveBullet : MonoBehaviour
             yield return null;
         }
 
-        Destroy(explosion); // Destroy the explosion object
+        Destroy(explosion); // Destroy the explosion object after animation
     }
 
     private void DealDamage()
@@ -166,4 +150,13 @@ public class ExplosiveBullet : MonoBehaviour
             }
         }
     }
+
+    void OnDrawGizmos()
+{
+    if (explosionPrefab != null)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, blastRadius);
+    }
+}
 }
