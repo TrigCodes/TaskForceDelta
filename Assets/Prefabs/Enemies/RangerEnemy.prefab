@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 50
   maxShield: 0
   shieldRegenTime: 0
   shieldPrefab: {fileID: 0}
@@ -181,7 +181,7 @@ MonoBehaviour:
   enemyRigidBody: {fileID: 1367181472191340195}
   moveSpeed: 3
   damage: 5
-  scrapReward: 5
+  scrapReward: 9
   sprites:
   - {fileID: 21300000, guid: 426649b44a9284e4a9d4b34686bd7136, type: 3}
   - {fileID: 21300000, guid: 590598198ba3be54f9aa4655e5748630, type: 3}
@@ -193,5 +193,5 @@ MonoBehaviour:
   changeInterval: 0.05
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 467133938084100077}
-  shootingRange: 4
-  fireRate: 2.5
+  shootingRange: 5
+  fireRate: 2

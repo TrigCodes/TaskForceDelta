@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 75
   maxShield: 0
   shieldRegenTime: 0
   shieldPrefab: {fileID: 0}
@@ -160,4 +160,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6965a18baa4143c4e9976c705a255d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRegenTimer: 60
+  wallRegenTimer: 45

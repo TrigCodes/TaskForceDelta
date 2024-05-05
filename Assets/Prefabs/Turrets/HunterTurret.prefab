@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
-  maxShield: 50
-  shieldRegenTime: 5
+  maxHealth: 100
+  maxShield: 100
+  shieldRegenTime: 2.5
   shieldPrefab: {fileID: 1995434595616503496, guid: ee7e714d7d775ab4f9be3c90c0b8a256, type: 3}
 --- !u!114 &5477058094688829738
 MonoBehaviour:
@@ -162,22 +162,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3260685984386509324, guid: c1a43d2f1b5a0ff4fa19662178f18514, type: 3}
   firingPoint: {fileID: 647882444064715556}
-  rangeIndicator: {fileID: 85520802275836395, guid: 61cbe49293e96234f8ac4b12ccb16f71, type: 3}
-  fireRate: 5
+  fireRate: 2
   range: 4
-  damage: 10
+  damage: 15
   cost: 150
-  costPerDamageUpgrade: 50
+  costPerDamageUpgrade: 90
   damageLevel: 0
-  incPerDamageLevel: 10
+  incPerDamageLevel: 5
   damageMaxLevel: 3
-  costPerFireRateUpgrade: 30
+  costPerFireRateUpgrade: 60
   fireRateLevel: 0
-  incPerFireRateLevel: 10
+  incPerFireRateLevel: 1
   fireRateMaxLevel: 3
-  costPerShieldUpgrade: 40
+  costPerShieldUpgrade: 30
   shieldLevel: 0
-  incPerShieldLevel: 10
+  incPerShieldLevel: 20
   shieldMaxLevel: 3
   sprites:
   - {fileID: 21300000, guid: 65e96cc680a65bc4ebe2115ddd9d0475, type: 3}
@@ -186,5 +185,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bbc7c745aea68ee43aca7686d2c6b041, type: 3}
   - {fileID: 21300000, guid: 355be04036374204f8e030807c384e1f, type: 3}
   changeInterval: 0.00005
-  specialUpgradeCost: 100
+  specialUpgradeCost: 350
   enhancementRange: 4

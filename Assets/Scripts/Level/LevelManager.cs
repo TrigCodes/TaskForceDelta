@@ -19,25 +19,20 @@ public class LevelManager : MonoBehaviour
     public static LevelManager main; // To easily access LevelManager from anywhere
     public int TotalScraps { get; private set; }
 
-    void Awake() 
-    {
-        main = this;
-        TotalScraps = initialScraps;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (main == null)
+        {
+            main = this;
+        }
+        TotalScraps = initialScraps;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
+       
     }
 
     public void AddScraps(int amount)

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/PauseMenu/PauseMenuStyle.uss?fileID=7433441132597879392&amp;guid=bbf760cb4b4b2df47a4e64c037c204d9&amp;type=3#PauseMenuStyle" />
+    <ui:VisualElement name="PauseMenu" class="main" style="display: none;">
+        <ui:Slider label="Master" high-value="1" low-value="0.0001" name="MasterVolumeSlider" class="custom-slider" />
+        <ui:Slider label="Sound" high-value="1" name="SoundVolumeSlider" low-value="0.0001" class="custom-slider" />
+        <ui:Slider label="Music" high-value="1" view-data-key="MusicVolume" name="MusicVolumeSlider" low-value="0.0001" class="custom-slider" style="margin-bottom: 50px;" />
+        <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResumeButton" class="button" />
+        <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MainMenuButton" class="button" />
+    </ui:VisualElement>
+</ui:UXML>
