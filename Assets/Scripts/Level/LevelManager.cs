@@ -1,3 +1,13 @@
+/***************************************************************
+*file: LevelManager.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general setting for level
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +25,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public GameObject wallPrefab;
     [SerializeField] public GameObject tilePrefab;
     [SerializeField] public Sprite replaceTilePrefabSprite;
-    
+
     public static LevelManager main; // To easily access LevelManager from anywhere
     public int TotalScraps { get; private set; }
-
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Called before the first frame update to set gameObject necessary info.
     void Start()
     {
         if (main == null)
@@ -29,12 +39,8 @@ public class LevelManager : MonoBehaviour
         TotalScraps = initialScraps;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
+    // function: AddScraps
+    // purpose: add scraps to gameObject
     public void AddScraps(int amount)
     {
         TotalScraps += amount;
@@ -43,7 +49,8 @@ public class LevelManager : MonoBehaviour
             UI.GetComponent<TopHUD>().UpdateScrapsDisplay(TotalScraps); // Update UI
         }
     }
-
+    // function: SpendScraps
+    // purpose: spend scrap from gameObject
     // Return false if player doesn't have enough
     public bool SpendScraps(int amount)
     {
@@ -55,7 +62,8 @@ public class LevelManager : MonoBehaviour
         }
         return false;
     }
-
+    // function: SpendWall
+    // purpose: spend on wall
     public bool SpendWall()
     {
         if (wallCount > 0)
@@ -66,13 +74,14 @@ public class LevelManager : MonoBehaviour
         return false;
     }
 
-    // Method to handle winning the level
+    // function: WinLevel
+    // purpose: handling winning the level
     public void WinLevel()
     {
         SceneManager.LoadScene("MainMenu");
     }
-
-    // Method to handle losing the level
+    // function: LoseLevel
+    // purpose: handling losing the level
     public void LoseLevel()
     {
         SceneManager.LoadScene("MainMenu");

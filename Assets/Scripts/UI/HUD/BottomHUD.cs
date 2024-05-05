@@ -1,3 +1,13 @@
+/***************************************************************
+*file: BottomHUD.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for BottomHUD
+*
+****************************************************************/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,18 +20,20 @@ public class BottomHUD : MonoBehaviour
     public VisualElement leftHUD;
     private Turret currentTurret;
 
-    private Button damageUpgradeButton, 
-                   fireRateUpgradeButton, 
-                   shieldUpgradeButton, 
+    private Button damageUpgradeButton,
+                   fireRateUpgradeButton,
+                   shieldUpgradeButton,
                    specialUpgradeButton;
-    private ProgressBar damageLevelProgressBar, 
-                        fireRateLevelProgressBar, 
+    private ProgressBar damageLevelProgressBar,
+                        fireRateLevelProgressBar,
                         shieldLevelProgressBar,
                         turretHPProgressBar;
     private Label specialUpgradeInfoLabel;
     private Coroutine shakeCoroutine;
     private Vector3 originalShakePosition;
 
+    // function: Start
+    // purpose: Get all necessary info for gameObject
     void Start()
     {
         // Make sure there is a UI Document attached to the same Game Object
@@ -57,7 +69,8 @@ public class BottomHUD : MonoBehaviour
         bottomHUD.style.display = DisplayStyle.None;
         leftHUD.style.display = DisplayStyle.None;
     }
-
+    // function: SetCurrentTurret
+    // purpose: set selected turret to current
     public void SetCurrentTurret(Turret turret)
     {
         currentTurret = turret;
@@ -65,7 +78,8 @@ public class BottomHUD : MonoBehaviour
         bottomHUD.style.display = DisplayStyle.Flex;  // Show the BottomHUD
         leftHUD.style.display = DisplayStyle.Flex;
     }
-
+    // function: UpdateUI
+    // purpose: change UI value
     private void UpdateUI()
     {
         // Update progress bars values
@@ -130,14 +144,15 @@ public class BottomHUD : MonoBehaviour
             specialUpgradeButton.text = $"\nSpecial Upgrade\nSpecial Upgrade Unlocked!";
         }
     }
-
+    // function: UpdateTurretHP
+    // purpose: change turret UI hp
     public void UpdateTurretHP(Turret turret, int newHealth, bool tookHit = false)
     {
         if (turret == currentTurret)
         {
             turretHPProgressBar.highValue = currentTurret.GetComponent<Health>().GetMaxHealth();
             turretHPProgressBar.value = newHealth;
-            
+
             if (tookHit)
             {
                 if (shakeCoroutine != null)
@@ -149,7 +164,8 @@ public class BottomHUD : MonoBehaviour
             }
         }
     }
-
+    // function: ShakeHealthBar
+    // purpose: shake health bar whehn took hit
     private IEnumerator ShakeHealthBar()
     {
         float shakeDuration = 0.4f; // duration of the shake in seconds
@@ -160,8 +176,8 @@ public class BottomHUD : MonoBehaviour
         {
             float x = Random.Range(-1f, 1f) * shakeMagnitude;
             float y = Random.Range(-1f, 1f) * shakeMagnitude;
-            turretHPProgressBar.transform.position = new Vector3(originalShakePosition.x + x, 
-                                                                 originalShakePosition.y + y, 
+            turretHPProgressBar.transform.position = new Vector3(originalShakePosition.x + x,
+                                                                 originalShakePosition.y + y,
                                                                  originalShakePosition.z);
 
             elapsed += Time.deltaTime;
@@ -171,13 +187,15 @@ public class BottomHUD : MonoBehaviour
         // Return the progress bar to its original position
         turretHPProgressBar.transform.position = originalShakePosition;
     }
-
+    // function: HideHUD
+    // purpose: hide bottom HUD
     public void HideHUD()
     {
         bottomHUD.style.display = DisplayStyle.None;  // Hide the BottomHUD
         leftHUD.style.display = DisplayStyle.None;
     }
-
+    // function: UpgradeTurret
+    // purpose: upgrade turret 
     private void UpgradeTurret(string upgradeType)
     {
         if (currentTurret == null) return;

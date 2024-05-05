@@ -1,3 +1,13 @@
+/***************************************************************
+*file: BlastTurret.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for Blast Turret
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +22,8 @@ public class BlastTurret : Turret
     [SerializeField] private float upgradeBlastRadius = 5f; // New blast radius with upgrade
 
     private bool specialUpgradeDone = false;
-
+    // function: Shoot
+    // purpose: shoot at target position with explosive bullet
     protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
         base.Shoot(targetPosition, canSeeStealthEnemies);
@@ -38,8 +49,8 @@ public class BlastTurret : Turret
             explosiveBulletScript.SetCollateralTags(new List<string> {"Enemy", "StealthEnemy" });
         }
     }
-
-    // Increase blast radius
+    // function: UpgradeSpecial
+    // purpose: Increase blast radius
     public override bool UpgradeSpecial()
     {
         if (!specialUpgradeDone && LevelManager.main.SpendScraps(specialUpgradeCost))
@@ -54,17 +65,20 @@ public class BlastTurret : Turret
             return false;
         }
     }
-
+    // function: GetSpecialInfoText
+    // purpose: return string when special upgrade
     public override string GetSpecialInfoText()
     {
         return "Increase Blast Radius";
     }
-
+    // function: GetSpecialUpgradeDone
+    // purpose: true if special upgrade is done
     public override bool GetSpecialUpgradeDone()
     {
         return specialUpgradeDone;
     }
-
+    // function: GetSpecialUpgradeCost
+    // purpose: get cost of special upgrade
     public override int GetSpecialUpgradeCost()
     {
         return specialUpgradeCost;

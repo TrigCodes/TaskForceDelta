@@ -1,3 +1,13 @@
+/***************************************************************
+*file: Turret.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general behavior for turret
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,8 +58,8 @@ public abstract class Turret : MonoBehaviour
     protected SpriteRenderer spriteRenderer; // SpriteRenderer component on the GameObject
     protected Coroutine spriteAnimationCoroutine;
 
-
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Start is called before the first frame update to get gamObject info
     protected virtual void Start()
     {
         // For animation
@@ -63,8 +73,8 @@ public abstract class Turret : MonoBehaviour
         turretCollider = GetComponent<BoxCollider2D>();
         timeSinceLastShot = 0;
     }
-
-    // Update is called once per frame
+    // function: Update
+    // purpose: Update is called once per frame to change behavior of turret
     protected virtual void Update()
     {
         // Switch modes based on if turret is player controlled or not
@@ -82,7 +92,8 @@ public abstract class Turret : MonoBehaviour
             CheckForStealthEnemies();
         }
     }
-
+    // function: OnDestroy
+    // purpose: handling behavior when gamObject is destroyed
     protected virtual void OnDestroy()
     {
         BottomHUD uiManager = FindObjectOfType<BottomHUD>();
@@ -102,7 +113,8 @@ public abstract class Turret : MonoBehaviour
         // Play audio
         AudioManager.main.PlayAudio(deathAudio, transform, 1);
     }
-
+    // function: OnMouseDown
+    // purpose: handling event when player mouse click on turret to control or not
     protected void OnMouseDown()
     {
         BottomHUD uiManager = FindObjectOfType<BottomHUD>();
@@ -130,7 +142,8 @@ public abstract class Turret : MonoBehaviour
             }
         }
     }
-
+    // function: HandlePlayerControl
+    // purpose: change turret behavior if player take control
     protected virtual void HandlePlayerControl()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -144,7 +157,7 @@ public abstract class Turret : MonoBehaviour
         {
             // Check if the mouse click is not on the turret itself
             if (!turretCollider.bounds.Contains(mousePosition))
-            {               
+            {
                 Shoot(mousePosition, CanSeeStealthEnemies);
                 timeSinceLastShot = 0;
             }
@@ -155,8 +168,8 @@ public abstract class Turret : MonoBehaviour
             timeSinceLastShot += Time.deltaTime;
         }
     }
-
-    // When player is not controlling
+    // function: TargetAndShoot
+    // purpose: When player is not controlling, this is the default behavior
     protected virtual void TargetAndShoot()
     {
         if (this != playerControlledTurret)
@@ -170,8 +183,8 @@ public abstract class Turret : MonoBehaviour
             // Find closest enemy if one exists
             foreach (Collider2D entity in entities)
             {
-                if (entity.gameObject.CompareTag("Enemy") || 
-                   (CanSeeStealthEnemies && 
+                if (entity.gameObject.CompareTag("Enemy") ||
+                   (CanSeeStealthEnemies &&
                         entity.gameObject.CompareTag("StealthEnemy")
                    )
                 )
@@ -198,14 +211,16 @@ public abstract class Turret : MonoBehaviour
             }
         }
     }
-
+    // function: RotateTowards
+    // purpose: rotate turret toward target position
     protected virtual void RotateTowards(Vector3 targetPosition)
     {
         Vector3 direction = targetPosition - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 270f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
+    // function: Shoot
+    // purpose: handling shooting at the target
     protected virtual void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
         // If the animation is already running, stop it
@@ -218,15 +233,16 @@ public abstract class Turret : MonoBehaviour
         // Play audio
         AudioManager.main.PlayAudio(shootAudio, transform, 1);
     }
-
-    // To see turret view radius in the scene editor
+    // function: OnDrawGizmosSelected
+    // purpose: To see turret view radius in the scene editor
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    // Methods to upgrade each aspect
+    // function: UpgradeDamage
+    // purpose: upgrade turret damage
     public bool UpgradeDamage()
     {
         if (damageLevel < damageMaxLevel && LevelManager.main.SpendScraps(costPerDamageUpgrade))
@@ -241,7 +257,8 @@ public abstract class Turret : MonoBehaviour
             return false;
         }
     }
-
+    // function: UpgradeFireRate
+    // purpose: upgrade turret fire rate
     public bool UpgradeFireRate()
     {
         if (fireRateLevel < fireRateMaxLevel && LevelManager.main.SpendScraps(costPerFireRateUpgrade))
@@ -256,7 +273,8 @@ public abstract class Turret : MonoBehaviour
             return false;
         }
     }
-
+    // function: UpgradeShield
+    // purpose: upgrade turret shield
     public bool UpgradeShield()
     {
         if (shieldLevel < shieldMaxLevel && LevelManager.main.SpendScraps(costPerShieldUpgrade))
@@ -271,7 +289,8 @@ public abstract class Turret : MonoBehaviour
             return false;
         }
     }
-
+    // function: CheckForStealthEnemies
+    // purpose: handling if turret can see stealth enemies
     private void CheckForStealthEnemies()
     {
         Collider2D[] entities = Physics2D.OverlapCircleAll(transform.position, range);
@@ -288,11 +307,14 @@ public abstract class Turret : MonoBehaviour
         }
     }
 
+    // abstract function to be implemented for special upgrade
     public abstract bool UpgradeSpecial();
     public abstract string GetSpecialInfoText();
     public abstract bool GetSpecialUpgradeDone();
     public abstract int GetSpecialUpgradeCost();
 
+    // function: CycleSprites
+    // purpose: cycling sprites
     protected IEnumerator CycleSprites()
     {
         int index = 0;

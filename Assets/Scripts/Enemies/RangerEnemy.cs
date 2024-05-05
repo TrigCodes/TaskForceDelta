@@ -1,3 +1,13 @@
+/***************************************************************
+*file: RangerEnemy.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for Ranger enemy
+*
+****************************************************************/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +22,8 @@ public class RangerEnemy : Enemy
     [SerializeField] private float fireRate = 1f; // Bullets per second
 
     private float timeSinceLastShot = 0; // Time counter to control shooting rate
-
+    // function: Update
+    // purpose: Moving toward target while shoot if in range
     protected override void Update()
     {
         base.Update();
@@ -30,7 +41,8 @@ public class RangerEnemy : Enemy
             }
         }
     }
-
+    // function : Shoot
+    // purpose: Shoot toward the closest target
     protected void Shoot()
     {
         if (timeSinceLastShot >= 1f / fireRate)
@@ -63,7 +75,8 @@ public class RangerEnemy : Enemy
             timeSinceLastShot += Time.deltaTime;
         }
     }
-
+    // function: GetClosestTarget
+    // purpose: Get closest target of gameObject
     protected override void GetClosestTarget()
     {
         // Get all possible targets in the scene
@@ -112,7 +125,7 @@ public class RangerEnemy : Enemy
         if (closestWall != null && closestTurretOrCore != null)
         {
             float difference = Vector3.Distance(closestTurretOrCore.position, closestWall.position);
-            
+
             if (difference <= shootingRange)
             {
                 target = closestTurretOrCore;

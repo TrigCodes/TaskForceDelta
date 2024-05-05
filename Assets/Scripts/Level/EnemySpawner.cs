@@ -1,9 +1,20 @@
+/***************************************************************
+*file: EnemySpawner.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general behavior spawning enemies
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // inner class that handle enemies in a wave and its spawn rate
     [System.Serializable]
     public class Wave
     {
@@ -46,12 +57,16 @@ public class EnemySpawner : MonoBehaviour
     private float pauseTimer;
     private bool isPausing = false;
 
+    // function: Start
+    // purpose: Called before the first frame update to set gameObject necessary info.
     void Start()
     {
         isPausing = true;  // Start the game with a pause
         pauseTimer = pauseDuration;  // Initialize the pause timer
     }
 
+    // function: Update
+    // purpose: handle spawning wave
     void Update()
     {
         if (isPausing)
@@ -74,7 +89,8 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
+    // function: PauseBetweenWaves
+    // purpose: pause for a time before the next wave start
     void PauseBetweenWaves()
     {
         pauseTimer -= Time.deltaTime;
@@ -84,7 +100,8 @@ public class EnemySpawner : MonoBehaviour
             StartWave();
         }
     }
-
+    // function: TransitionToNextWave
+    // purpose: ready for the next wave
     void TransitionToNextWave()
     {
         currentWaveIndex++;
@@ -99,7 +116,8 @@ public class EnemySpawner : MonoBehaviour
             LevelManager.main.WinLevel();
         }
     }
-
+    // function: StartWave
+    // purpose: start the wave
     void StartWave()
     {
         if (currentWaveIndex >= waves.Length)
@@ -124,7 +142,8 @@ public class EnemySpawner : MonoBehaviour
         // Send wave alert
         FindObjectOfType<Alert>().DisplayAlert($"Wave {currentWaveIndex+1}");
     }
-
+    // function: SpawnEnemy
+    // purpose: spawn enemies
     void SpawnEnemy()
     {
         int prefabIndex = Random.Range(0, enemyPrefabs.Length);
@@ -135,7 +154,8 @@ public class EnemySpawner : MonoBehaviour
             enemiesSpawned++;
         }
     }
-
+    // function: GetRandomSpawnPoint
+    // purpose: randomly get spawn location
     private Vector3 GetRandomSpawnPoint()
     {
         return LevelManager.main.enemySpawnPoints[

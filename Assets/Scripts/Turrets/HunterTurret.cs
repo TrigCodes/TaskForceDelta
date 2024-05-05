@@ -1,3 +1,13 @@
+/***************************************************************
+*file: HunterTurret.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for Hunter Turret
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +21,8 @@ public class HunterTurret : Turret
     private HashSet<Turret> enhancedTurrets = new HashSet<Turret>();
     private bool specialUpgradeDone = false;
 
+    // function: Update
+    // purpose: called every frame to handling turert behavior
     protected override void Update()
     {
         base.Update();
@@ -22,7 +34,8 @@ public class HunterTurret : Turret
             EnhanceNearbyTurrets();
         }
     }
-
+    // function: OnDestroy
+    // purpose: handling event when gameObject is destroyed
     protected override void OnDestroy()
     {
         if (specialUpgradeDone)
@@ -35,7 +48,8 @@ public class HunterTurret : Turret
 
         base.OnDestroy();
     }
-
+    // function: CheckForStealthEnemies
+    // purpose: check for stealth enemies
     private void CheckForStealthEnemies()
     {
         Collider2D[] entities = Physics2D.OverlapCircleAll(transform.position, range);
@@ -51,7 +65,8 @@ public class HunterTurret : Turret
             }
         }
     }
-
+    // function: TargetAndShoot
+    // purpose: get target to shot at
     protected override void TargetAndShoot()
     {
         if (this != playerControlledTurret)
@@ -66,7 +81,7 @@ public class HunterTurret : Turret
             foreach (Collider2D entity in entities)
             {
                 // Overriden to include StealthEnemy for targeting
-                if (entity.gameObject.CompareTag("Enemy") || 
+                if (entity.gameObject.CompareTag("Enemy") ||
                     entity.gameObject.CompareTag("StealthEnemy"))
                 {
                     Vector3 directionToTarget = entity.transform.position - currentPosition;
@@ -91,7 +106,8 @@ public class HunterTurret : Turret
             }
         }
     }
-
+    // function: Shoot
+    // purpose: shoot at target position
     protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
         base.Shoot(targetPosition, canSeeStealthEnemies);
@@ -107,7 +123,8 @@ public class HunterTurret : Turret
             bulletScript.SetTargetTags(new List<string> { "Enemy", "StealthEnemy" });
         }
     }
-
+    // function: UpgradeSpecial
+    // purpose: upgrade unique turret behavior
     public override bool UpgradeSpecial()
     {
         if (!specialUpgradeDone && LevelManager.main.SpendScraps(specialUpgradeCost))
@@ -121,13 +138,15 @@ public class HunterTurret : Turret
             return false;
         }
     }
-
+    // function: GetSpecialInfoText
+    // purpose: return string when turret special is upgraded
     public override string GetSpecialInfoText()
     {
         return "Surrounding Turrets Can See Stealth Enemies";
     }
 
-    // Make nearby turrets be able to see stealth turrets
+    // funcion: EnhanceNearbyTurrets
+    // purpose: Make nearby turrets be able to see stealth turrets
     private void EnhanceNearbyTurrets()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, enhancementRange);
@@ -154,17 +173,20 @@ public class HunterTurret : Turret
 
         enhancedTurrets = currentTurrets;
     }
-
+    // function: GetSpecialUpgradeDone
+    // purpose: return if special upgrade is done
     public override bool GetSpecialUpgradeDone()
     {
         return specialUpgradeDone;
     }
-
+    // function: GetSpecialUpgradeCost
+    // purpose: return special upgrade cost
     public override int GetSpecialUpgradeCost()
     {
         return specialUpgradeCost;
     }
-
+    // function: OnDrawGizmosSelected
+    // purpose: draw radius when selected
     protected override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();

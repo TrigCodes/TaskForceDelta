@@ -1,3 +1,13 @@
+/***************************************************************
+*file: Bullet.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general behavior for bullet
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,13 +23,15 @@ public class Bullet : MonoBehaviour
     private bool isFired = false; // To ensure the direction is only set once
     private int damage; // Damage the bullet will deal to the enemy
 
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Called before the first frame update to get gameObject necessary info.
     void Start()
     {
         Destroy(gameObject, maxLifetime); // Automatically destroy the bullet after a set time
     }
 
-    // Update is called once per frame
+    // function: Update
+    // purpose: Update is called once per frame to move toward a direction
     void Update()
     {
         // Wait for direction to be set by shooter
@@ -29,17 +41,20 @@ public class Bullet : MonoBehaviour
             transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
     }
-
+    // function: SetDamage
+    // purpose: set bullet damage
     public void SetDamage(int newDamage)
     {
         damage = newDamage;
     }
-
+    // function: SetTargetTags
+    // purpose: set list of tag that enemies can hit
     public void SetTargetTags(List<string> tags)
     {
         targetTags = new List<string>(tags);
     }
-
+    // function: SetDirection
+    // purpose: set direction of bullet
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection; // Set bullet direction
@@ -51,7 +66,8 @@ public class Bullet : MonoBehaviour
         // Rotate the bullet to align with the direction
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-
+    // function: OnTriggerEnter2D
+    // purpose: determine behavior when it collide with something.
     public void OnTriggerEnter2D(Collider2D hitInfo)
     {
         // Check if the object hit is a target

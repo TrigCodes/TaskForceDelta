@@ -1,3 +1,13 @@
+/***************************************************************
+*file: Health.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general behavior for Health
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,23 +26,28 @@ public class Health : MonoBehaviour
     private float lastDamageTime; // Time since last damage
     private Coroutine wallRegenCoroutine; // Coroutine for wall regeneration
 
+    // function: GetCurrentHealth
+    // purpose: get the gameObject current health
     public int GetCurrentHealth()
     {
         return currentHealth;
     }
-
+    // function: GetMaxHealth
+    // purpose: get current gameObject max health
     public int GetMaxHealth()
     {
         return maxHealth;
     }
 
-    // For Shield upgrades
+    // function: UpgradeMaxShield
+    // purpose: upgrade gameObject shield
     public void UpgradeMaxShield(int incrementPerShieldLevel)
     {
         maxShield += incrementPerShieldLevel;
     }
 
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Called before the first frame update to get gameObject necessary info.
     void Start()
     {
         currentHealth = maxHealth; // Initialize health
@@ -45,7 +60,8 @@ public class Health : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // function: Update
+    // purpose: call regenerate shield after some time of not taking damage
     void Update()
     {
         // If no damage was taken for the shieldRegenTime then regenate shield to full
@@ -54,7 +70,8 @@ public class Health : MonoBehaviour
             RegenerateShield();
         }
     }
-
+    // function: TakeDamage
+    // purpose: deal damage to game object, to shield then to turret health if applicable
     public void TakeDamage(int damage)
     {
         lastDamageTime = Time.time;
@@ -109,13 +126,15 @@ public class Health : MonoBehaviour
             }
         }
     }
-
+    // function: RegenerateShield
+    // purpose: regenerate shield
     private void RegenerateShield()
     {
         currentShield = maxShield;
         UpdateShieldVisibility();
     }
-
+    // function: UpdateShieldVisibility
+    // purpose: add shield visibility if not down
     private void UpdateShieldVisibility()
     {
         if (shieldVisual != null)
@@ -131,7 +150,8 @@ public class Health : MonoBehaviour
             }
         }
     }
-
+    // function: UpdateWallOpacity
+    // purpose: Update wall opacity of gameObject
     private void UpdateWallOpacity()
     {
         var renderer = GetComponent<Renderer>();
@@ -143,7 +163,8 @@ public class Health : MonoBehaviour
             renderer.material.color = color;
         }
     }
-
+    // function: WallRegeneration
+    // purpose: regenerate wall 
     private IEnumerator WallRegeneration(float delay)
     {
         yield return new WaitForSeconds(delay);

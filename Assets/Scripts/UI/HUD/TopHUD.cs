@@ -1,3 +1,13 @@
+/***************************************************************
+*file: TopHUD.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for TopHUD
+*
+****************************************************************/
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,7 +19,8 @@ public class TopHUD : MonoBehaviour
     private ProgressBar coreHealthBar;
     private VisualElement root;
 
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Get all necessary info for gameObject
     void Start()
     {
         // Make sure there is a UI Document attached to the same Game Object
@@ -27,12 +38,8 @@ public class TopHUD : MonoBehaviour
         UpdateCoreHPDisplay(LevelManager.main.core.GetComponent<Health>().GetCurrentHealth());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // function: UpdateScrapsDisplay
+    // purpose: update scraps display at top HUD
     public void UpdateScrapsDisplay(int newScrapsAmount)
     {
         if (scrapsLabel != null)
@@ -40,7 +47,8 @@ public class TopHUD : MonoBehaviour
             scrapsLabel.text = $"Scraps: {newScrapsAmount}";
         }
     }
-
+    // function: UpdateCoreHPDisplay
+    // pupose: update core HP at top HUD
     public void UpdateCoreHPDisplay(int newCoreHP)
     {
         if (coreHealthBar != null)
@@ -48,7 +56,8 @@ public class TopHUD : MonoBehaviour
             coreHealthBar.value = newCoreHP;
         }
     }
-
+    // function: UpdateWaveDisplay
+    // purpose: update wave info
     public void UpdateWaveDisplay(int currentWave, int totalWaves)
     {
         if (waveLabel != null)

@@ -1,3 +1,13 @@
+/***************************************************************
+*file: MachineGunTurret.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for Machine Gun Turret
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +21,8 @@ public class MachineGunTurret : Turret
 
     private bool specialUpgradeDone = false;
 
+    // function: Shoot
+    // purpose: shoot at target
     protected override void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
         base.Shoot(targetPosition, canSeeStealthEnemies);
@@ -33,8 +45,8 @@ public class MachineGunTurret : Turret
             }
         }
     }
-
-    // Increase rate and max fire rate to make it faster than the others
+    // function: UpgradeSpecial
+    // purpose: Increase rate and max fire rate to make it faster than the others
     public override bool UpgradeSpecial()
     {
         if (!specialUpgradeDone && LevelManager.main.SpendScraps(specialUpgradeCost))
@@ -57,17 +69,20 @@ public class MachineGunTurret : Turret
             return false;
         }
     }
-
+    // function: GetSpecialInfoText
+    // purpose: return string when turret special is upgraded
     public override string GetSpecialInfoText()
     {
         return $"Increase Fire Rate By {upgradeFireRateLevel} Levels";
     }
-
+    // function: GetSpecialUpgradeDone
+    // purpose: return if special upgrade is done
     public override bool GetSpecialUpgradeDone()
     {
         return specialUpgradeDone;
     }
-
+    // function: GetSpecialUpgradeCost
+    // purpose: return special upgrade cost
     public override int GetSpecialUpgradeCost()
     {
         return specialUpgradeCost;

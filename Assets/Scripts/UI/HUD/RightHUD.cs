@@ -1,3 +1,13 @@
+/***************************************************************
+*file: RightHUD.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for RightHUD
+*
+****************************************************************/
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +18,8 @@ public class RightHUD : MonoBehaviour
     private VisualElement rightHUD;
     private Button machineGunTurretButton, hunterTurretButton, blastTurretButton, wallButton;
 
+    // function: Start
+    // purpose: Get all necessary info for gameObject
     void Start()
     {
         uiDocument = GetComponent<UIDocument>();
@@ -30,6 +42,8 @@ public class RightHUD : MonoBehaviour
         HideHUD();
     }
 
+    // function: UpdateUI
+    // purpose: change UI value
     private void UpdateUI()
     {
         // Retrieve costs for each turret type using the FindCostByName method
@@ -51,17 +65,21 @@ public class RightHUD : MonoBehaviour
         }
     }
 
+    // function: ShowHUD
+    // purpose: show right HUD
     public void ShowHUD()
     {
         UpdateUI();
         rightHUD.style.display = DisplayStyle.Flex;
     }
-
+    // function: HideHUD
+    // purpose: hide right HUD
     public void HideHUD()
     {
         rightHUD.style.display = DisplayStyle.None;
     }
-
+    // function: PlaceTurret
+    // purpose: select turret to place
     private void PlaceTurret(string turretName)
     {
         GameObject turretToPlace = FindTurretByName(turretName);
@@ -75,16 +93,18 @@ public class RightHUD : MonoBehaviour
             {
                 FindObjectOfType<Alert>().DisplayAlert($"Not Enough Scraps for {turretName}");
             }
-            
+
         }
     }
-
+    // function: PlaceWall
+    // purpose: select wall to place
     private void PlaceWall()
     {
         PlaceableTile.selectedTile.PlaceWall();
         HideHUD();
     }
-
+    // function: FindTurretByName
+    // purpose: get turret from name
     private GameObject FindTurretByName(string name)
     {
         foreach (GameObject turret in LevelManager.main.turretPrefabs)
@@ -96,7 +116,8 @@ public class RightHUD : MonoBehaviour
         }
         return null; // Return null if no turret matches the name
     }
-
+    // function: FindCostByName
+    // purpose: get turret cost from name
     public int FindCostByName(string name)
     {
         GameObject turret = FindTurretByName(name);

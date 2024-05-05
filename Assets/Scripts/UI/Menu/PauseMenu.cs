@@ -1,3 +1,13 @@
+/***************************************************************
+*file: PauseMenu.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for PauseMenu
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +19,8 @@ public class PauseMenu : MonoBehaviour
     private VisualElement pauseMenu;
     bool gamePaused = false;
 
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Start is called before the first frame update to get and set necessary info
     void Start()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
@@ -31,8 +42,8 @@ public class PauseMenu : MonoBehaviour
         soundVolumeSlider.RegisterValueChangedCallback(evt => AudioManager.main.SetSoundFXVolume(evt.newValue));
         musicVolumeSlider.RegisterValueChangedCallback(evt => AudioManager.main.SetMusicVolume(evt.newValue));
     }
-
-    // Update is called once per frame
+    // function: Update
+    // purpose: Update is called once per frame to check if player pause
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -47,21 +58,24 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-
+    // function: PauseGame
+    // purpose: pause the game
     private void PauseGame()
     {
         Time.timeScale = 0;
         gamePaused = true;
         pauseMenu.style.display = DisplayStyle.Flex;
     }
-
+    // function: ResumeGame
+    // purpose: resume the game
     private void ResumeGame()
     {
         Time.timeScale = 1;
         gamePaused = false;
         pauseMenu.style.display = DisplayStyle.None;
     }
-
+    // function: MainMenu
+    // purpose: return to main menu
     private void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");

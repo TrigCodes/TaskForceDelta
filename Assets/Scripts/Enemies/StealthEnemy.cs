@@ -1,3 +1,13 @@
+/***************************************************************
+*file: StealthEnemy.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide behavior for Stealth enemy
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +21,8 @@ public class StealthEnemy : BasicEnemy
     private Coroutine visibilityCoroutine;
     private Color color;
     private float visibilityTimeout = 0.5f; // Delay in seconds to wait before hiding again
-
+    // function: Start
+    // purpose: Called before the first frame update to get gameObject necessary info.
     protected override void Start()
     {
         base.Start();
@@ -24,7 +35,8 @@ public class StealthEnemy : BasicEnemy
             spriteRenderer.color = color;
         }
     }
-
+    // function: EnableVisibility
+    // purpose: Disable invisibility of gameObject
     // Must be constantly called (ex. In Update function)
     public void EnableVisibility()
     {
@@ -40,7 +52,8 @@ public class StealthEnemy : BasicEnemy
             visibilityCoroutine = StartCoroutine(DisableVisibilityAfterDelay());
         }
     }
-
+    // function: DisableVisibilityAfterDelay
+    // purpose: Regain stealth
     // To automatically hide agian if the detector is destroyed or out of range.
     private IEnumerator DisableVisibilityAfterDelay()
     {

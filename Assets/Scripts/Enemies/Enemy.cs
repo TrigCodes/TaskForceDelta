@@ -1,3 +1,13 @@
+/***************************************************************
+*file: Enemy.cs
+*author: Samin Hossain, An Le, Otto Del Cid, Luis Navarrete, Luis Salazar, Sebastian Cursaro
+*class: CS 4700 - Game Development
+*assignment: Final Program
+*date last modified: 5/6/2024
+*
+*purpose: This class provide general behavior for all enemy.
+*
+****************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +31,8 @@ public abstract class Enemy : MonoBehaviour
     protected Transform target; // Where enemy will target
     protected SpriteRenderer spriteRenderer; // SpriteRenderer component on the GameObject
 
-    // Start is called before the first frame update
+    // function: Start
+    // purpose: Called before the first frame update to get gameObject necessary info.
     protected virtual void Start()
     {
         // For animation
@@ -37,12 +48,14 @@ public abstract class Enemy : MonoBehaviour
 
         GetClosestTarget();
     }
-
+    // function: Update
+    // purpose: Call GetClosestTarget every frame
     protected virtual void Update()
     {
         GetClosestTarget();
     }
-
+    // function: OnDestroy
+    // purpose: determine behavior when gameObject is destroyed
     protected virtual void OnDestroy()
     {
         if (LevelManager.main != null)
@@ -53,7 +66,8 @@ public abstract class Enemy : MonoBehaviour
         // Play audio
         AudioManager.main.PlayAudio(deathAudio, transform, 1);
     }
-
+    // function: MoveTowardsTarget
+    // purpose: determine movement behavior toward target
     protected virtual void MoveTowardsTarget(bool shouldMove = true)
     {
         if (target != null && shouldMove)
@@ -67,7 +81,8 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-
+    // function: GetClosestTarget
+    // purpose: Get the closest target from gameObject
     protected virtual void GetClosestTarget()
     {
         // Get all possible targets in the scene
@@ -99,7 +114,8 @@ public abstract class Enemy : MonoBehaviour
 
         target = bestTarget;
     }
-
+    // function: CycleSprites
+    // purpose: cycle between sprites
     protected virtual IEnumerator CycleSprites()
     {
         int index = 0; // Start with the first sprite
@@ -124,7 +140,7 @@ public abstract class Enemy : MonoBehaviour
                     goingBack = true;
                 }
             }
-            yield return new WaitForSeconds(changeInterval); 
+            yield return new WaitForSeconds(changeInterval);
         }
     }
 }
