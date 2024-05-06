@@ -190,4 +190,4 @@ MonoBehaviour:
   changeInterval: 0.00005
   blastRadius: 1.5
   specialUpgradeCost: 300
-  upgradeBlastRadius: 3
+  upgradeBlastRadius: 2.25
