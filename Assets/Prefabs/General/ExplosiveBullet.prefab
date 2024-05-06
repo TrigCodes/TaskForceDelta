@@ -164,3 +164,4 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8859460405324228028, guid: 5b878fe2285a6e64f8f4ad34f588802c, type: 3}
   speed: 20
   maxLifetime: 2
+  explosionAudio: {fileID: 8300000, guid: f3bcfcf36ae247c41828953f923feb66, type: 3}

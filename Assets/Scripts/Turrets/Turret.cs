@@ -18,7 +18,7 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected Transform firingPoint;
     [SerializeField] protected AudioClip shootAudio;
-    [SerializeField] protected AudioClip deathAudio;
+    [SerializeField] public AudioClip deathAudio;
 
     [Header("Attributes")]
     [SerializeField] protected float fireRate = 1f;
@@ -109,9 +109,6 @@ public abstract class Turret : MonoBehaviour
                 uiManager.HideHUD();
             }
         }
-
-        // Play audio
-        AudioManager.main.PlayAudio(deathAudio, transform, 1);
     }
     // function: OnMouseDown
     // purpose: handling event when player mouse click on turret to control or not
@@ -223,15 +220,15 @@ public abstract class Turret : MonoBehaviour
     // purpose: handling shooting at the target
     protected virtual void Shoot(Vector3 targetPosition, bool canSeeStealthEnemies)
     {
+        // Play audio
+        AudioManager.main.PlayAudio(shootAudio, transform, 1);
+
         // If the animation is already running, stop it
         if (spriteAnimationCoroutine != null)
             StopCoroutine(spriteAnimationCoroutine);
 
         // Restart the animation coroutine
         spriteAnimationCoroutine = StartCoroutine(CycleSprites());
-
-        // Play audio
-        AudioManager.main.PlayAudio(shootAudio, transform, 1);
     }
     // function: OnDrawGizmosSelected
     // purpose: To see turret view radius in the scene editor

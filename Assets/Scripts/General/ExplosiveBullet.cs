@@ -18,6 +18,7 @@ public class ExplosiveBullet : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private float speed = 20f;
     [SerializeField] private float maxLifetime = 2f;
+    [SerializeField] protected AudioClip explosionAudio;
 
     private List<string> targetTags; // List of tags that this bullet can hit
     private List<string> collateralTags; // List of tage that take collateral damage
@@ -119,6 +120,9 @@ public class ExplosiveBullet : MonoBehaviour
     // purpose: start the explosion and destruction sequence
     private IEnumerator ExplodeAndDestroy()
     {
+        // Play audio
+        AudioManager.main.PlayAudio(explosionAudio, transform, 1);
+
         // Spawn the explosion at full size
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         explosion.transform.localScale = new Vector3(blastRadius, blastRadius, 1);

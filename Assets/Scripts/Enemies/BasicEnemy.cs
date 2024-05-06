@@ -33,6 +33,9 @@ public class BasicEnemy : Enemy
             other.gameObject.CompareTag("Core") ||
             other.gameObject.CompareTag("Wall"))
         {
+            // Play audio
+            AudioManager.main.PlayAudio(attackAudio, transform, 1);
+
             Health targetHealth = other.gameObject.GetComponent<Health>();
             if (targetHealth != null)
             {
@@ -41,9 +44,6 @@ public class BasicEnemy : Enemy
                 // Bounce back to immitate attacking again
                 StartCoroutine(BounceBack());
             }
-
-            // Play audio
-            AudioManager.main.PlayAudio(attackAudio, transform, 1);
         }
     }
     // function: OnCollisionStay2D

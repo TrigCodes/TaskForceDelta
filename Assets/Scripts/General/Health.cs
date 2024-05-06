@@ -121,6 +121,18 @@ public class Health : MonoBehaviour
                 }
                 else if (gameObject.tag != "DamagedWall")
                 {
+                    // Play audio
+                    if (gameObject.tag != null && gameObject.tag == "Turret")
+                    {
+                        Turret turretInstance = GetComponent<Turret>();
+                        AudioManager.main.PlayAudio(turretInstance.deathAudio, transform, 1);
+                    }
+                    else if (gameObject.tag != null && gameObject.tag == "Enemy")
+                    {
+                        Enemy enemyInstance = GetComponent<Enemy>();
+                        AudioManager.main.PlayAudio(enemyInstance.deathAudio, transform, 1);
+                    }
+
                     Destroy(gameObject); // Destroy the object when health depletes
                 }
             }

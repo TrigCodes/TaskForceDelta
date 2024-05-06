@@ -47,6 +47,9 @@ public class RangerEnemy : Enemy
     {
         if (timeSinceLastShot >= 1f / fireRate)
         {
+            // Play audio
+            AudioManager.main.PlayAudio(attackAudio, transform, 1);
+
             // Prepare bullet object and shoot
             GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
@@ -66,9 +69,6 @@ public class RangerEnemy : Enemy
                 }
             }
             timeSinceLastShot = 0;
-
-            // Play audio
-            AudioManager.main.PlayAudio(attackAudio, transform, 1);
         }
         else
         {

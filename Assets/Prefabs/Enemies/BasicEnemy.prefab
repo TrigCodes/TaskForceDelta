@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRigidBody: {fileID: 1109085547762174375}
+  attackAudio: {fileID: 8300000, guid: d3381c84118231e42a5fa6e48e24c5fb, type: 3}
+  deathAudio: {fileID: 8300000, guid: a29ad47b9ef218f42b69000110414270, type: 3}
   moveSpeed: 5
   damage: 10
   scrapReward: 5
