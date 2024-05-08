@@ -164,17 +164,17 @@ MonoBehaviour:
   firingPoint: {fileID: 3584084220465731613}
   shootAudio: {fileID: 8300000, guid: 91e9b9a5bb9be2a4ab70b5afda0dd0ab, type: 3}
   deathAudio: {fileID: 8300000, guid: 547a4cf9840e4d743a96697c1bcfce1c, type: 3}
-  fireRate: 1
-  range: 3
-  damage: 25
-  cost: 200
-  costPerDamageUpgrade: 90
+  fireRate: 2
+  range: 4
+  damage: 20
+  cost: 240
+  costPerDamageUpgrade: 100
   damageLevel: 0
-  incPerDamageLevel: 5
+  incPerDamageLevel: 6
   damageMaxLevel: 3
-  costPerFireRateUpgrade: 60
+  costPerFireRateUpgrade: 75
   fireRateLevel: 0
-  incPerFireRateLevel: 1
+  incPerFireRateLevel: 0.75
   fireRateMaxLevel: 3
   costPerShieldUpgrade: 30
   shieldLevel: 0
@@ -190,4 +190,4 @@ MonoBehaviour:
   changeInterval: 0.00005
   blastRadius: 1.5
   specialUpgradeCost: 300
-  upgradeBlastRadius: 2.25
+  upgradeBlastRadius: 3

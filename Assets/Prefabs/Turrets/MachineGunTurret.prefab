@@ -164,21 +164,21 @@ MonoBehaviour:
   firingPoint: {fileID: 1379734009526695255}
   shootAudio: {fileID: 8300000, guid: 5a76e793e10570943afb46662b42c994, type: 3}
   deathAudio: {fileID: 8300000, guid: 547a4cf9840e4d743a96697c1bcfce1c, type: 3}
-  fireRate: 3
-  range: 4
+  fireRate: 2
+  range: 5
   damage: 10
-  cost: 100
-  costPerDamageUpgrade: 90
+  cost: 150
+  costPerDamageUpgrade: 100
   damageLevel: 0
-  incPerDamageLevel: 5
+  incPerDamageLevel: 4
   damageMaxLevel: 3
-  costPerFireRateUpgrade: 60
+  costPerFireRateUpgrade: 75
   fireRateLevel: 0
-  incPerFireRateLevel: 1
+  incPerFireRateLevel: 0.5
   fireRateMaxLevel: 3
   costPerShieldUpgrade: 30
   shieldLevel: 0
-  incPerShieldLevel: 20
+  incPerShieldLevel: 25
   shieldMaxLevel: 3
   sprites:
   - {fileID: 21300000, guid: 31800f91c84e33a49ab4bf86e03d57ce, type: 3}

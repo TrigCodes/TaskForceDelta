@@ -36,7 +36,7 @@ public abstract class Turret : MonoBehaviour
     [Header("Fire Rate Upgrade Attributes")]
     [SerializeField] public int costPerFireRateUpgrade = 30;
     [SerializeField] public int fireRateLevel = 0;
-    [SerializeField] protected int incPerFireRateLevel = 10;
+    [SerializeField] protected float incPerFireRateLevel = 10f;
     [SerializeField] public int fireRateMaxLevel = 3;
 
     [Header("Shield Upgrade Attributes")]
@@ -260,8 +260,11 @@ public abstract class Turret : MonoBehaviour
     {
         if (fireRateLevel < fireRateMaxLevel && LevelManager.main.SpendScraps(costPerFireRateUpgrade))
         {
-            fireRateLevel++;
+            fireRateLevel += 1;
             fireRate += incPerFireRateLevel;
+
+            costPerFireRateUpgrade += 50;
+
             return true;
         }
         else
@@ -278,6 +281,9 @@ public abstract class Turret : MonoBehaviour
         {
             shieldLevel++;
             GetComponent<Health>().UpgradeMaxShield(incPerShieldLevel);
+
+            costPerShieldUpgrade += 50;
+
             return true;
         }
         else

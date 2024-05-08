@@ -61,6 +61,7 @@ public abstract class Enemy : MonoBehaviour
         if (LevelManager.main != null)
         {
             LevelManager.main.AddScraps(scrapReward);
+            LevelManager.main.GetComponent<EnemySpawner>().EnemyDestroyed();  // Notify that an enemy has been destroyed
         }
     }
     // function: MoveTowardsTarget

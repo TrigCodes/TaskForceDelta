@@ -56,6 +56,7 @@ public class EnemySpawner : MonoBehaviour
     private float timeSinceLastSpawn;
     private float pauseTimer;
     private bool isPausing = false;
+    private int activeEnemies;
 
     // function: Start
     // purpose: Called before the first frame update to set gameObject necessary info.
@@ -76,17 +77,17 @@ public class EnemySpawner : MonoBehaviour
         }
 
         timeSinceLastSpawn += Time.deltaTime;
-        if (timeSinceLastSpawn >= (1f / currentWave.spawnRate))
+
+        // Ensure we only attempt to spawn more enemies if there are still enemies to be spawned for the current wave
+        if (timeSinceLastSpawn >= (1f / currentWave.spawnRate) && enemiesSpawned < totalEnemiesToSpawn)
         {
-            if (enemiesSpawned < totalEnemiesToSpawn)
-            {
-                SpawnEnemy();
-                timeSinceLastSpawn = 0;
-            }
-            else
-            {
-                TransitionToNextWave();
-            }
+            SpawnEnemy();
+            timeSinceLastSpawn = 0;
+        }
+        else if (enemiesSpawned >= totalEnemiesToSpawn && activeEnemies == 0)
+        {
+            // Ensure to only transition if all enemies of the current wave are dealt with
+            TransitionToNextWave();
         }
     }
     // function: PauseBetweenWaves
@@ -132,6 +133,7 @@ public class EnemySpawner : MonoBehaviour
             totalEnemiesToSpawn += count;
         }
         enemiesSpawned = 0;
+        activeEnemies = totalEnemiesToSpawn;
         timeSinceLastSpawn = 0;
 
         LevelManager.main.UI.GetComponent<TopHUD>().UpdateWaveDisplay(
@@ -153,6 +155,12 @@ public class EnemySpawner : MonoBehaviour
             currentWave.enemyCount[prefabIndex]--;
             enemiesSpawned++;
         }
+    }
+    // function: EnemyDestroyed
+    // purpose: call this method from the Enemy class when an enemy is destroyed
+    public void EnemyDestroyed()
+    {
+        activeEnemies--;
     }
     // function: GetRandomSpawnPoint
     // purpose: randomly get spawn location

@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758963761a3aed0418064a3cd7f14fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 30
   maxShield: 0
   shieldRegenTime: 0
   shieldPrefab: {fileID: 0}
@@ -181,8 +181,8 @@ MonoBehaviour:
   enemyRigidBody: {fileID: 1109085547762174375}
   attackAudio: {fileID: 8300000, guid: d3381c84118231e42a5fa6e48e24c5fb, type: 3}
   deathAudio: {fileID: 8300000, guid: a29ad47b9ef218f42b69000110414270, type: 3}
-  moveSpeed: 5
-  damage: 10
+  moveSpeed: 3
+  damage: 3
   scrapReward: 5
   sprites:
   - {fileID: 21300000, guid: a555a59c8bb577d498ea2a1de8714ea5, type: 3}
