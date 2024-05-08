@@ -86,8 +86,15 @@ public class EnemySpawner : MonoBehaviour
         }
         else if (enemiesSpawned >= totalEnemiesToSpawn && activeEnemies == 0)
         {
-            // Ensure to only transition if all enemies of the current wave are dealt with
-            TransitionToNextWave();
+            // Check if it's the last wave and all enemies are defeated
+            if (currentWaveIndex == waves.Length - 1)
+            {
+                LevelManager.main.WinLevel(); // Trigger win condition for the last wave
+            }
+            else
+            {
+                TransitionToNextWave(); // Proceed to next wave for other cases
+            }
         }
     }
     // function: PauseBetweenWaves
@@ -110,11 +117,6 @@ public class EnemySpawner : MonoBehaviour
         {
             isPausing = true;
             pauseTimer = pauseDuration;
-        }
-        else
-        {
-            // All waves are completed, trigger the win condition
-            LevelManager.main.WinLevel();
         }
     }
     // function: StartWave
